@@ -24,6 +24,7 @@ class Kandang extends CI_Controller
 
     public function tambah()
     {
+        $data["title"] = "Tambah Data Kandang";
         $kandang = $this->Kandang_model;
         $validation = $this->form_validation;
         $validation->set_rules($kandang->rules());
@@ -33,11 +34,12 @@ class Kandang extends CI_Controller
             $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
         }
 
-        $this->load->view("kandang/tambah");
+        $this->load->view("kandang/tambah",$data);
     }
 
     public function ubah($id = null)
     {
+        $data["title"] = "Ubah Data Kandang";
         if (!isset($id)) redirect('kandang');
        
         $kandang = $this->Kandang_model;

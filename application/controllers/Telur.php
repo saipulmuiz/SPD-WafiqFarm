@@ -11,33 +11,36 @@ class Telur extends CI_Controller
 			redirect(base_url("otentikasi"));
 		}
         $this->load->model("Telur_model");
+        $this->load->model("Kandang_model");
         $this->load->library('form_validation');
     }
 
     public function index()
     {
-        $data["title"] = "Data Telur";
+        $data["title"] = "Transaksi Telur Harian";
    	    $data["actor"] = "Telur";
-        $data["telurs"] = $this->Telur_model->getAll();
+        $data["telurs"] = $this->Telur_model->getRelation();
         $this->load->view('telur/list',$data);
     }
 
     public function tambah()
     {
+        $data["title"] = "Tambah Transaksi Telur Harian";
         $telur = $this->Telur_model;
         $validation = $this->form_validation;
         $validation->set_rules($telur->rules());
-
+        $data["kandangs"]=$this->Kandang_model->getAll();
         if ($validation->run()) {
             $telur->simpan();
             $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
         }
 
-        $this->load->view("telur/tambah");
+        $this->load->view("telur/tambah",$data);
     }
 
     public function ubah($id = null)
     {
+        $data["title"] = "Ubah Transaksi Telur Harian";
         if (!isset($id)) redirect('telur');
        
         $telur = $this->Telur_model;
@@ -49,6 +52,7 @@ class Telur extends CI_Controller
             $this->session->set_flashdata('success', 'Berhasil diubah!');
         }
 
+        $data["kandangs"]=$this->Kandang_model->getAll();
         $data["telur"] = $telur->getById($id);
         if (!$data["telur"]) show_404();
         

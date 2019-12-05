@@ -4,13 +4,14 @@ class DOC_model extends CI_Model
 {
     private $_table = "tbl_doc";
 
-    public $id_doc;
+    public $id_input;
     public $jenis;
     public $id_supplier;
     public $tgl_masuk;
     public $umur;
     public $jumlah;
     public $harga;
+    public $total_harga;
 
     public function rules()
     {
@@ -18,9 +19,18 @@ class DOC_model extends CI_Model
             ['field' => 'jumlah',
             'label' => 'Jumlah',
             'rules' => 'numeric'],
+            
             ['field' => 'umur',
             'label' => 'Umur',
-            'rules' => 'numeric']
+            'rules' => 'numeric'],
+            
+            ['field' => 'harga',
+            'label' => 'Harga',
+            'rules' => 'numeric'],
+            
+            ['field' => 'total_harga',
+            'label' => 'Total Harga',
+            'rules' => 'numeric'],
         ];
     }
 
@@ -44,19 +54,20 @@ class DOC_model extends CI_Model
     
     public function getById($id)
     {
-        return $this->db->get_where($this->_table, ["id_doc" => $id])->row();
+        return $this->db->get_where($this->_table, ["id_input" => $id])->row();
     }
 
     public function simpan()
     {
         $post = $this->input->post();
-        $this->id_doc = $post["id_doc"];
+        $this->id_input = uniqid();
         $this->jenis = $post["jenis"];
         $this->id_supplier = $post["id_supplier"];
         $this->tgl_masuk = $post["tgl_masuk"];
         $this->umur = $post["umur"];
         $this->jumlah = $post["jumlah"];
         $this->harga = $post["harga"];
+        $this->total_harga = $post["total_harga"];
         $this->db->insert($this->_table, $this);
     }
 
@@ -69,16 +80,17 @@ class DOC_model extends CI_Model
             'tgl_masuk' => $post["tgl_masuk"],
             'umur' => $post["umur"],
             'jumlah' => $post["jumlah"],
-            'harga' => $post["harga"]
+            'harga' => $post["harga"],
+            'total_harga' => $post["total_harga"]
         );
 
        
-        $this->db->where('id_doc',$post['id']);
+        $this->db->where('id_input',$post['id']);
         $this->db->update($this->_table, $data);
     }
 
     public function delete($id)
     {
-        return $this->db->delete($this->_table, array("id_doc" => $id));
+        return $this->db->delete($this->_table, array("id_input" => $id));
     }
 }

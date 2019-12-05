@@ -37,30 +37,24 @@
                                         <table id="pakan" class="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>Kode Pakan</th>
-                                                    <th>Jenis Pakan</th>
+                                                    <th>Id Pakan</th>
                                                     <th>Merk Pakan</th>
                                                     <th>Nama Supplier</th>
-                                                    <th>Harga</th>
-                                                    <th>Stok</th>
-                                                    <th>Tanggal Masuk</th>
+                                                    <th>Stok (Kg)</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($pakans as $pakan): ?>
                                                 <tr>
-                                                    <td><?= $pakan->kd_pakan ?></td>
-                                                    <td><?= $pakan->jenis ?></td>
+                                                    <td><?= $pakan->id_pakan ?></td>
                                                     <td><?= $pakan->merk ?></td>
                                                     <td><?= $pakan->nama ?></td>
-                                                    <td><?= "Rp" . number_format("$pakan->harga",0, '', '.') ?></td>
                                                     <td><?= $pakan->stok ?></td>
-                                                    <td><?= $pakan->tgl_masuk ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('pakan/ubah/'.$pakan->kd_pakan) ?>"
+                                                        <a href="<?php echo site_url('pakan/ubah/'.$pakan->id_pakan) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('pakan/hapus/'.$pakan->kd_pakan) ?>')"
+                                                        <a onclick="deleteConfirm('<?php echo site_url('pakan/hapus/'.$pakan->id_pakan) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>

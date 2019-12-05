@@ -5,79 +5,70 @@
                 <div class="row">
                     <div class="col-md-12">
                     <div class="card-header">
-						<a href="<?php echo site_url('doc') ?>"><i class="fa fa-arrow-left"></i> Kembali</a>
+						<a href="<?php echo site_url('pakan_masuk') ?>"><i class="fa fa-arrow-left"></i> Kembali</a>
                     </div>
                     <?php if ($this->session->flashdata('success')): ?>
                     <div class="alert alert-success" role="alert">
                         <?php echo $this->session->flashdata('success'); ?>
                     </div>
                     <?php endif; ?>
-                        <form id="jvalidate" action="<?php base_url('doc/tambah') ?>" method="post" class="form-horizontal">
+                        <form action="<?php base_url('pakan_masuk/ubah') ?>" method="post" class="form-horizontal">
+
+                        <input type="hidden" name="id" value="<?php echo $pakan->id_input?>" />
+                        <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                                <input type="hidden" class="form-control" value="<?= date('Y-m-d H:i:s'); ?>" name="tgl_update">
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><strong>Tambah</strong> DOC</h3>
-                            <div class="panel-body">
+                                <h3 class="panel-title"><strong>Ubah</strong> Pakan</h3>
+                            <div class="panel-body">  
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Jenis</label>
+                                    <label class="col-md-3 col-xs-12 control-label">Merk</label>
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control" name="jenis" required/>
+                                            <input type="text" class="form-control" name="merk" value="<?= $pakan->merk ?>" required/>
                                         </div>        
-                                        <span class="help-block">Masukan jenis doc ayam</span>
+                                        <span class="help-block">Masukan merk pakan ayam</span>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Supplier</label>
-                                    <div class="col-md-6 col-xs-12">                                                                                                                                       
-                                        <select class="form-control select" name="id_supplier">
+                                    <div class="col-md-6 col-xs-12">  
+                                                                                                                                                                            
+                                    <select class="form-control select" name="id_supplier">
                                         <?php foreach ($suppliers as $supplier): ?>
-                                            <option value="<?= $supplier->id_supplier ?>"><?= $supplier->nama ?></option>
+                                            <option value="<?= $supplier->id_supplier ?>"<?php if($supplier->id_supplier == $pakan->id_supplier) echo 'selected' ?>><?= $supplier->nama ?></option>
                                         <?php endforeach; ?>
-                                        </select>                                   
-                                        <span class="help-block">Masukan id supplier</span>
+                                        </select>                                  
+                                        <span class="help-block">Masukan nama supplier</span>
                                     </div>
                                 </div>
-
+                                
                                 <div class="form-group">                                        
                                     <label class="col-md-3 col-xs-12 control-label">Tanggal Masuk</label>
                                     <div class="col-md-6 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                            <input type="text" class="form-control datepicker" value="<?= date('Y-m-d'); ?>" name="tgl_masuk">                                            
+                                            <input type="text" class="form-control datepicker" value="<?= $pakan->tgl_masuk ?>" name="tgl_masuk">                                            
                                         </div>
-                                        <span class="help-block">Masukan tanggal masuk doc</span>
+                                        <span class="help-block">Masukan tanggal masuk pakan</span>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Usia</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control <?php echo form_error('umur') ? 'is-invalid':'' ?>" name="umur" value="1" required/>
-                                        </div>    
-                                        <div class="invalid-feedback">
-                                            <?php echo form_error('umur') ?>
-                                        </div>                                          
-                                        <span class="help-block">Masukan usia doc ayam (hari)</span>
-                                    </div>
-                                </div>
-
-                                
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Jumlah</label>
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" oninput="totalHarga()" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="1" required/>
+                                            <input type="text" oninput="totalHarga()" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $pakan->jumlah ?>" required/>
                                         </div>    
                                         <div class="invalid-feedback">
                                             <?php echo form_error('jumlah') ?>
                                         </div>                                          
-                                        <span class="help-block">Masukan jumlah doc ayam</span>
+                                        <span class="help-block">Masukan jumlah pakan (Kg)</span>
                                     </div>
                                 </div>
 
@@ -86,12 +77,9 @@
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-dollar"></span></span>
-                                            <input type="text" oninput="totalHarga()" class="form-control <?php echo form_error('harga') ? 'is-invalid':'' ?>" name="harga" required/>
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            <?php echo form_error('harga') ?>
-                                        </div>      
-                                        <span class="help-block">Masukan harga doc ayam</span>
+                                            <input type="text" oninput="totalHarga()" class="form-control" name="harga" value="<?= $pakan->harga ?>" required/>
+                                        </div>        
+                                        <span class="help-block">Masukan harga pakan ayam</span>
                                     </div>
                                 </div>
 
@@ -99,13 +87,10 @@
                                     <label class="col-md-3 col-xs-12 control-label">Total Harga</label>
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-dollar"></span></span>
-                                            <input type="text" class="form-control <?php echo form_error('total_harga') ? 'is-invalid':'' ?>" name="total_harga" readonly/>
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            <?php echo form_error('total_harga') ?>
-                                        </div>      
-                                        <span class="help-block">Total harga doc ayam</span>
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            <input type="text" id="total" class="form-control" name="total_harga" value="<?= $pakan->total_harga ?>" readonly/>
+                                        </div>                                      
+                                        <span class="help-block">Total harga pakan</span>
                                     </div>
                                 </div>
 
@@ -126,8 +111,7 @@
         <!-- END PAGE CONTENT -->
     </div>
     <!-- END PAGE CONTAINER -->
-  
-    <?php $this->load->view('_parts/javascript')?> 
+    <?php $this->load->view('_parts/javascript')?>
     <script type="text/javascript">
         function totalHarga(){
         let num1 = document.getElementsByName("jumlah")[0].value;

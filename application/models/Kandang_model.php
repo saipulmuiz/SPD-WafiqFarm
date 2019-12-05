@@ -5,6 +5,7 @@ class Kandang_model extends CI_Model
     private $_table = "tbl_kandang";
 
     public $id_kandang;
+    public $nama_kandang;
     public $kapasitas;
     public $jml_ayam;
 
@@ -34,6 +35,7 @@ class Kandang_model extends CI_Model
     public function simpan()
     {
         $post = $this->input->post();
+        $this->nama_kandang = $post["nama_kandang"];
         $this->kapasitas = $post["kapasitas"];
         $this->jml_ayam = $post["jml_ayam"];
         $this->db->insert($this->_table, $this);
@@ -42,12 +44,17 @@ class Kandang_model extends CI_Model
     public function update()
     {
         $post = $this->input->post();
-        $this->id_kandang = $post["id"];
-        $this->kapasitas = $post["kapasitas"];
-        $this->jml_ayam = $post["jml_ayam"];
-        $this->db->update($this->_table, $this, array('id_kandang' => $post['id']));
-    }
+        $data= array(
+            'nama_kandang' => $post["nama_kandang"],
+            'kapasitas' => $post["kapasitas"],
+            'jml_ayam' => $post["jml_ayam"]
+        );
 
+       
+        $this->db->where('id_kandang',$post['id']);
+        $this->db->update($this->_table, $data);
+    }
+    
     public function delete($id)
     {
         return $this->db->delete($this->_table, array("id_kandang" => $id));

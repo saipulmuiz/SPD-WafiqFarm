@@ -19,7 +19,18 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>Ubah</strong> Kandang</h3>
-                            <div class="panel-body">                                                                        
+                            <div class="panel-body">   
+                                
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-12 control-label">Nama kandang</label>
+                                    <div class="col-md-6 col-xs-12">                                            
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            <input type="text" class="form-control" name="nama_kandang" value="<?= $kandang->nama_kandang ?>" required/>
+                                        </div>                                     
+                                        <span class="help-block">Masukan nama kandang ayam</span>
+                                    </div>
+                                </div>
                                 
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Kapasitas</label>

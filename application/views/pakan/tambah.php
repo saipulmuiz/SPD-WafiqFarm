@@ -16,29 +16,9 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>Tambah</strong> Pakan</h3>
-                            <div class="panel-body">                                                                        
-                                
-                                <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Kode Pakan</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control" name="kd_pakan" required/>
-                                        </div>       
-                                        <span class="help-block">Masukan kode pakan ayam</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Jenis</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control" name="jenis" required/>
-                                        </div>        
-                                        <span class="help-block">Masukan jenis pakan ayam</span>
-                                    </div>
-                                </div>
+                            <div class="panel-body">
+                            <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                                <input type="hidden" class="form-control" value="<?= date('Y-m-d H:i:s'); ?>" name="tgl_update">
 
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Merk</label>
@@ -64,38 +44,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Harga</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-dollar"></span></span>
-                                            <input type="text" class="form-control" name="harga" required/>
-                                        </div>        
-                                        <span class="help-block">Masukan harga pakan ayam</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Stok</label>
+                                    <label class="col-md-3 col-xs-12 control-label">Stok Tersedia</label>
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control spinner_default <?php echo form_error('stok') ? 'is-invalid':'' ?>" name="stok" value="1" required/>
+                                            <input type="text" class="form-control <?php echo form_error('stok') ? 'is-invalid':'' ?>" name="stok" value="1" required/>
                                         </div>    
                                         <div class="invalid-feedback">
                                             <?php echo form_error('stok') ?>
                                         </div>                                          
-                                        <span class="help-block">Masukan Stok pakan (Kg)</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">                                        
-                                    <label class="col-md-3 col-xs-12 control-label">Tanggal Masuk</label>
-                                    <div class="col-md-6 col-xs-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                            <input type="text" class="form-control datepicker" value="<?= date('Y-m-d'); ?>" name="tgl_masuk">                                            
-                                        </div>
-                                        <span class="help-block">Masukan tanggal masuk pakan</span>
+                                        <span class="help-block">Masukan stok pakan tersedia (Kg)</span>
                                     </div>
                                 </div>
 
@@ -118,11 +76,12 @@
     <!-- END PAGE CONTAINER -->
   
     <?php $this->load->view('_parts/javascript')?> 
-    <script>
-        $(function(){
-                //Spinner
-                $(".spinner_default").spinner()                
-                //End spinne
-            });
+    <script type="text/javascript">
+        function totalHarga(){
+        let num1 = document.getElementsByName("jumlah")[0].value;
+        let num2 = document.getElementsByName("harga")[0].value;
+        let sum = Number(num1) * Number(num2);
+        document.getElementsByName("total_harga")[0].value = sum;
+    }
     </script>
     <?php $this->load->view('_parts/footer')?> 

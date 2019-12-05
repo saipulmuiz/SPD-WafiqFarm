@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller
+class Stok extends CI_Controller
 {
     public function __construct()
     {
@@ -10,59 +10,59 @@ class User extends CI_Controller
         if($this->session->userdata('status') != "MASUK"){
 			redirect(base_url("otentikasi"));
 		}
-        $this->load->model("User_model");
+        $this->load->model("Stok_model");
         $this->load->library('form_validation');
     }
 
     public function index()
     {
-        $data["title"] = "Data User";
-   	    $data["actor"] = "User";
-        $data["data_user"] = $this->User_model->getAll();
-        $this->load->view('user/list',$data);
+        $data["title"] = "Data Stok";
+   	    $data["actor"] = "Stok";
+        $data["stoks"] = $this->Stok_model->getAll();
+        $this->load->view('stok/list',$data);
     }
 
     public function tambah()
     {
-        $data["title"] = "Tambah Data User";
-        $user = $this->User_model;
+        $data["title"] = "Tambah Data Stok";
+        $stok = $this->Stok_model;
         $validation = $this->form_validation;
-        $validation->set_rules($user->rules());
+        $validation->set_rules($stok->rules());
 
         if ($validation->run()) {
-            $user->simpan();
+            $stok->simpan();
             $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
         }
 
-        $this->load->view("user/tambah",$data);
+        $this->load->view("stok/tambah",$data);
     }
 
     public function ubah($id = null)
     {
-        $data["title"] = "Ubah Data Data";
-        if (!isset($id)) redirect('user');
+        $data["title"] = "Ubah Data Stok";
+        if (!isset($id)) redirect('stok');
        
-        $user = $this->User_model;
+        $stok = $this->Stok_model;
         $validation = $this->form_validation;
-        $validation->set_rules($user->rules());
+        $validation->set_rules($stok->rules());
 
         if ($validation->run()) {
-            $user->update();
+            $stok->update();
             $this->session->set_flashdata('success', 'Berhasil diubah!');
         }
 
-        $data["user"] = $user->getById($id);
-        if (!$data["user"]) show_404();
+        $data["stok"] = $stok->getById($id);
+        if (!$data["stok"]) show_404();
         
-        $this->load->view("user/ubah", $data);
+        $this->load->view("stok/ubah", $data);
     }
 
     public function hapus($id=null)
     {
         if (!isset($id)) show_404();
         
-        if ($this->User_model->delete($id)) {
-            redirect(site_url('user'));
+        if ($this->Stok_model->delete($id)) {
+            redirect(site_url('stok'));
         }
     }
 }

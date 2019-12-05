@@ -37,30 +37,32 @@
                                         <table id="doc" class="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>Id DOC</th>
+                                                    <th>Id Input</th>
                                                     <th>Jenis DOC</th>
                                                     <th>Nama Supplier</th>
                                                     <th>Tanggal Masuk</th>
-                                                    <th>Umur</th>
+                                                    <th>Usia</th>
                                                     <th>Jumlah</th>
-                                                    <th>Harga</th>
+                                                    <th>Harga Satuan</th>
+                                                    <th>Total Harga</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($docs as $doc): ?>
                                                 <tr>
-                                                    <td><?= $doc->id_doc ?></td>
+                                                    <td><?= $doc->id_input ?></td>
                                                     <td><?= $doc->jenis ?></td>
                                                     <td><?= $doc->nama ?></td>
                                                     <td><?= $doc->tgl_masuk ?></td>
                                                     <td><?= $doc->umur . ' Hari'?></td>
                                                     <td><?= $doc->jumlah ?></td>
                                                     <td><?= "Rp" . number_format("$doc->harga",0, '', '.') ?></td>
+                                                    <td><?= "Rp" . number_format("$doc->total_harga",0, '', '.') ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('doc/ubah/'.$doc->id_doc) ?>"
+                                                        <a href="<?php echo site_url('doc/ubah/'.$doc->id_input) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('doc/hapus/'.$doc->id_doc) ?>')"
+                                                        <a onclick="deleteConfirm('<?php echo site_url('doc/hapus/'.$doc->id_input) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>

@@ -24,6 +24,7 @@ class Pegawai extends CI_Controller
 
     public function tambah()
     {
+        $data["title"] = "Tambah Data Pegawai";
         $pegawai = $this->Pegawai_model;
         $validation = $this->form_validation;
         $validation->set_rules($pegawai->rules());
@@ -38,6 +39,7 @@ class Pegawai extends CI_Controller
 
     public function ubah($id = null)
     {
+        $data["title"] = "Ubah Data Pegawai";
         if (!isset($id)) redirect('pegawai');
        
         $pegawai = $this->Pegawai_model;

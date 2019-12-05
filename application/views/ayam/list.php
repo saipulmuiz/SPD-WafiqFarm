@@ -37,24 +37,32 @@
                                         <table id="ayam" class="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>Id Ayam</th>
-                                                    <th>Jenis</th>
+                                                    <th>Id Input</th>
+                                                    <th>Jenis Ayam</th>
+                                                    <th>Nama Supplier</th>
+                                                    <th>Tanggal Masuk</th>
                                                     <th>Umur</th>
                                                     <th>Jumlah</th>
+                                                    <th>Harga Satuan</th>
+                                                    <th>Total Harga</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($ayams as $ayam): ?>
                                                 <tr>
-                                                    <td><?= $ayam->id_ayam ?></td>
+                                                    <td><?= $ayam->id_input ?></td>
                                                     <td><?= $ayam->jenis ?></td>
-                                                    <td><?= $ayam->umur ?></td>
+                                                    <td><?= $ayam->nama ?></td>
+                                                    <td><?= $ayam->tgl_masuk ?></td>
+                                                    <td><?= $ayam->umur . ' Hari'?></td>
                                                     <td><?= $ayam->jumlah ?></td>
+                                                    <td><?= "Rp" . number_format("$ayam->harga",0, '', '.') ?></td>
+                                                    <td><?= "Rp" . number_format("$ayam->total_harga",0, '', '.') ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('ayam/ubah/'.$ayam->id_ayam) ?>"
+                                                        <a href="<?php echo site_url('ayam/ubah/'.$ayam->id_input) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('ayam/hapus/'.$ayam->id_ayam) ?>')"
+                                                        <a onclick="deleteConfirm('<?php echo site_url('ayam/hapus/'.$ayam->id_input) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>

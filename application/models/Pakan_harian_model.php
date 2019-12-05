@@ -1,38 +1,28 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Telur_model extends CI_Model
+class Pakan_harian_model extends CI_Model
 {
-    private $_table = "tbl_telur_harian";
+    private $_table = "tbl_pakan_harian";
 
     public $id_input;
     public $tgl_input;
+    public $waktu_input;
     public $id_user;
     public $id_kandang;
     public $jumlah;
-    public $telur_sehat;
-    public $telur_cacat;
-    public $kalkulasi_butir;
 
     public function rules()
     {
         return [
             ['field' => 'jumlah',
             'label' => 'Jumlah',
-            'rules' => 'numeric'],
-
-            ['field' => 'telur_sehat',
-            'label' => 'Telur Sehat',
-            'rules' => 'numeric'],
-
-            ['field' => 'telur_cacat',
-            'label' => 'Telur Cacat',
             'rules' => 'numeric']
         ];
     }
 
     public function getRelation()
     {
-            $query = $this->db->query("SELECT * FROM tbl_telur_harian INNER JOIN tbl_user ON tbl_telur_harian.id_user=tbl_user.id_user INNER JOIN tbl_kandang ON tbl_telur_harian.id_kandang=tbl_kandang.id_kandang");
+            $query = $this->db->query("SELECT * FROM tbl_pakan_harian INNER JOIN tbl_user ON tbl_pakan_harian.id_user=tbl_user.id_user INNER JOIN tbl_kandang ON tbl_pakan_harian.id_kandang=tbl_kandang.id_kandang");
             return $query->result();
     }
 
@@ -51,12 +41,10 @@ class Telur_model extends CI_Model
         $post = $this->input->post();
         $this->id_input = uniqid();
         $this->tgl_input = $post["tgl_input"];
+        $this->waktu_input = $post["waktu_input"];
         $this->id_user = $post["id_user"];
         $this->id_kandang = $post["id_kandang"];
         $this->jumlah = $post["jumlah"];
-        $this->telur_sehat = $post["telur_sehat"];
-        $this->telur_cacat = $post["telur_cacat"];
-        $this->kalkulasi_butir = $post["kalkulasi_butir"];
         $this->db->insert($this->_table, $this);
     }
 
@@ -65,12 +53,10 @@ class Telur_model extends CI_Model
         $post = $this->input->post();
         $data= array(
             'tgl_input' => $post["tgl_input"],
+            'waktu_input' => $post["waktu_input"],
             'id_user' => $post["id_user"],
             'id_kandang' => $post["id_kandang"],
             'jumlah' => $post["jumlah"],
-            'telur_sehat' => $post["telur_sehat"],
-            'telur_cacat' => $post["telur_cacat"],
-            'kalkulasi_butir' => $post["kalkulasi_butir"],
         );
 
        

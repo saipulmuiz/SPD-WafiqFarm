@@ -1,7 +1,7 @@
 <?php $this->load->view('_parts/header')?>
  <!-- PAGE TITLE -->
                 <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Data Kandang</h2>
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Jenis Data Stok</h2>
                 </div>
                 <!-- END PAGE TITLE -->                
                 
@@ -17,44 +17,46 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                 <div class="card-header">
-                                    <a class="btn btn-success btn-condensed" href="<?php echo site_url('kandang/tambah') ?>"><i class="fa fa-plus"></i> Tambah Kandang</a>
+                                    <a class="btn btn-success btn-condensed" href="<?php echo site_url('stok/tambah') ?>"><i class="fa fa-plus"></i> Tambah Stok</a>
                                 </div>
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Data</button>
                                         <ul class="dropdown-menu">
                                             <li class="divider"></li>
-                                            <li><a href="#" onClick ="$('#kandang').tableExport({type:'csv',escape:'false'});"><img src='<?php echo base_url('img/icons/csv.png') ?>' width="24"/> CSV</a></li>
+                                            <li><a href="#" onClick ="$('#stok').tableExport({type:'csv',escape:'false'});"><img src='<?php echo base_url('img/icons/csv.png') ?>' width="24"/> CSV</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#" onClick ="$('#kandang').tableExport({type:'excel',escape:'false'});"><img src='<?php echo base_url('img/icons/xls.png') ?>' width="24"/> XLS</a></li>
+                                            <li><a href="#" onClick ="$('#stok').tableExport({type:'excel',escape:'false'});"><img src='<?php echo base_url('img/icons/xls.png') ?>' width="24"/> XLS</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#" onClick ="$('#kandang').tableExport({type:'pdf',escape:'false'});"><img src='<?php echo base_url('img/icons/pdf.png') ?>' width="24"/> PDF</a></li>
+                                            <li><a href="#" onClick ="$('#stok').tableExport({type:'pdf',escape:'false'});"><img src='<?php echo base_url('img/icons/pdf.png') ?>' width="24"/> PDF</a></li>
                                         </ul>
                                     </div>                                    
                                     
                                 </div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
-                                        <table id="kandang" class="table datatable">
+                                        <table id="stok" class="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>Id Kandang</th>
-                                                    <th>Nama Kandang</th>
-                                                    <th>Kapasitas</th>
-                                                    <th>Jumlah Ayam</th>
+                                                    <th>Id Stok</th>
+                                                    <th>Jenis</th>
+                                                    <th>Satuan</th>
+                                                    <th>Tanggal Update</th>
+                                                    <th>Jumlah</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($kandangs as $kandang): ?>
+                                                <?php foreach ($stoks as $stok): ?>
                                                 <tr>
-                                                    <td><?= $kandang->id_kandang ?></td>
-                                                    <td><?= $kandang->nama_kandang ?></td>
-                                                    <td><?= $kandang->kapasitas ?></td>
-                                                    <td><?= $kandang->jml_ayam ?></td>
+                                                    <td><?= $stok->id_stok ?></td>
+                                                    <td><?= $stok->jenis ?></td>
+                                                    <td><?= $stok->satuan ?></td>
+                                                    <td><?= $stok->tgl_update ?></td>
+                                                    <td><?= $stok->jumlah ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('kandang/ubah/'.$kandang->id_kandang) ?>"
+                                                        <a href="<?php echo site_url('stok/ubah/'.$stok->id_stok) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('kandang/hapus/'.$kandang->id_kandang) ?>')"
+                                                        <a onclick="deleteConfirm('<?php echo site_url('stok/hapus/'.$stok->id_stok) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>

@@ -25,6 +25,7 @@ class DOC extends CI_Controller
 
     public function tambah()
     {
+        $data["title"] = "Tambah Data DOC";
         $doc = $this->DOC_model;
         $validation = $this->form_validation;
         $validation->set_rules($doc->rules());
@@ -40,6 +41,7 @@ class DOC extends CI_Controller
 
     public function ubah($id = null)
     {
+        $data["title"] = "Ubah Data DOC";
         if (!isset($id)) redirect('doc');
        
         $doc = $this->DOC_model;

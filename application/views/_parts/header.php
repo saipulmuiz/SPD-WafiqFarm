@@ -36,7 +36,7 @@
                             </div>
                             <div class="profile-data">
                                 <div class="profile-data-name"><?= $this->session->userdata('nama') ?></div>
-                                <div class="profile-data-title"><?php if($this->session->userdata('level') == '1') echo 'Owner'; else echo 'Pegawai'?></div>
+                                <div class="profile-data-title"><?php if($this->session->userdata('level') == '1') echo 'Admin'; else echo 'Pegawai'?></div>
                             </div>
                             <div class="profile-controls">
                                 <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
@@ -45,22 +45,30 @@
                         </div>                                                                        
                     </li>
                     <li class="xn-title">Navigation</li>
-                    <li>
+                    <li <?php if($this->uri->segment(1)=="overview"){echo 'class="active"';}?>>
                         <a href="<?=base_url('overview');?>"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboards</span></a>
-                    </li>                    
-                    <li class="xn-openable">
-                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Data Master</span></a>
+                    </li>                                       
+                    <li class="xn-openable <?php $url_aktif = $this->uri->segment(1); if($url_aktif=="pegawai" || $url_aktif=="kandang" || $url_aktif=="supplier" || $url_aktif=="pakan" || $url_aktif=="doc" || $url_aktif=="ayam" || $url_aktif=="user"){echo 'active';}else{echo '';}?>">
+                        <a href="#"><span class="fa fa-archive"></span> <span class="xn-text">Data Master</span></a>
                         <ul>
-                            <li><a href="<?=base_url('pegawai/');?>"><span class="fa fa-user"></span> Data Pegawai</a></li>
-                            <li><a href="<?=base_url('kandang/');?>"><span class="fa fa-dollar"></span> Data Kandang</a></li>
-                            <li><a href="<?=base_url('supplier/');?>"><span class="fa fa-wrench"></span> Data Supplier</a></li>                          
-                            <li><a href="<?=base_url('pakan/');?>"><span class="fa fa-archive"></span> Data Pakan</a></li>                          
-                            <li><a href="<?=base_url('doc/');?>"><span class="fa fa-archive"></span> Data DOC</a></li>                          
-                            <li><a href="<?=base_url('ayam/');?>"><span class="fa fa-archive"></span> Data Ayam</a></li>                          
-                            <li><a href="<?=base_url('telur/');?>"><span class="fa fa-archive"></span> Data Telur</a></li>                          
-                            <li><a href="<?=base_url('user/');?>"><span class="fa fa-archive"></span> Data User</a></li>                          
+                            <li <?php if($this->uri->segment(1)=="pegawai"){echo 'class="active"';}?>><a href="<?=base_url('pegawai/');?>"><span class="fa fa-group"></span> Data Pegawai</a></li>
+                            <li <?php if($this->uri->segment(1)=="kandang"){echo 'class="active"';}?>><a href="<?=base_url('kandang/');?>"><span class="fa fa-home"></span> Data Kandang</a></li>
+                            <li <?php if($this->uri->segment(1)=="supplier"){echo 'class="active"';}?>><a href="<?=base_url('supplier/');?>"><span class="fa fa-users"></span> Data Supplier</a></li>
+                            <li <?php if($this->uri->segment(1)=="pakan"){echo 'class="active"';}?>><a href="<?=base_url('pakan/');?>"><span class="fa fa-bitbucket"></span> Data Pakan</a></li>
+                            <li <?php if($this->uri->segment(1)=="doc"){echo 'class="active"';}?>><a href="<?=base_url('doc/');?>"><span class="fa fa-twitter"></span> Data DOC</a></li>                       
+                            <li <?php if($this->uri->segment(1)=="ayam"){echo 'class="active"';}?>><a href="<?=base_url('ayam/');?>"><span class="fa fa-twitter"></span> Data Ayam</a></li>
+                            <li <?php if($this->uri->segment(1)=="user"){echo 'class="active"';}?>><a href="<?=base_url('user/');?>"><span class="fa fa-user"></span> Data User</a></li>                          
                         </ul>
                     </li>
+                    <li class="xn-openable <?php $url_aktif = $this->uri->segment(1); if($url_aktif=="telur" || $url_aktif=="pakan_harian" || $url_aktif=="pakan_masuk"){echo 'active';}else{echo '';}?>">
+                        <a href="#"><span class="fa fa-archive"></span> <span class="xn-text">Transaksi</span></a>
+                        <ul>
+                            <li <?php if($this->uri->segment(1)=="pakan_masuk"){echo 'class="active"';}?>><a href="<?=base_url('pakan_masuk/');?>"><span class="fa fa-bitbucket"></span> Pakan Masuk</a></li>
+                            <li <?php if($this->uri->segment(1)=="pegawai"){echo 'class="active"';}?>><a href="<?=base_url('pakan_harian/');?>"><span class="fa fa-bitbucket"></span> Beri Pakan</a></li>
+                            <li <?php if($this->uri->segment(1)=="telur"){echo 'class="active"';}?>><a href="<?=base_url('telur/');?>"><span class="fa fa-circle"></span><span class="xn-text"> Telur Harian</span></a></li>                          
+                        </ul>
+                    </li>
+                    <li <?php if($this->uri->segment(1)=="stok"){echo 'class="active"';}?>><a href="<?=base_url('stok/');?>"><span class="fa fa-circle"></span><span class="xn-text"> Stok</`</a></li>                   
                     
                 </ul>
                 <!-- END X-NAVIGATION -->
@@ -106,27 +114,21 @@
                             <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
                                 <a href="#" class="list-group-item">
                                     <div class="list-group-status status-online"></div>
-                                    <img src="assets/images/users/user2.jpg" class="pull-left" alt="John Doe"/>
+                                    <img src="<?= base_url('assets/images/users/user2.jpg') ?>" class="pull-left" alt="John Doe"/>
                                     <span class="contacts-title">John Doe</span>
                                     <p>Praesent placerat tellus id augue condimentum</p>
                                 </a>
                                 <a href="#" class="list-group-item">
                                     <div class="list-group-status status-away"></div>
-                                    <img src="assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk"/>
+                                    <img src="<?= base_url('assets/images/users/user.jpg') ?>" class="pull-left" alt="Dmitry Ivaniuk"/>
                                     <span class="contacts-title">Dmitry Ivaniuk</span>
                                     <p>Donec risus sapien, sagittis et magna quis</p>
                                 </a>
                                 <a href="#" class="list-group-item">
                                     <div class="list-group-status status-away"></div>
-                                    <img src="assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali"/>
+                                    <img src="<?= base_url('assets/images/users/user3.jpg') ?>" class="pull-left" alt="Nadia Ali"/>
                                     <span class="contacts-title">Nadia Ali</span>
                                     <p>Mauris vel eros ut nunc rhoncus cursus sed</p>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-offline"></div>
-                                    <img src="assets/images/users/user6.jpg" class="pull-left" alt="Darth Vader"/>
-                                    <span class="contacts-title">Darth Vader</span>
-                                    <p>I want my money back!</p>
                                 </a>
                             </div>     
                             <div class="panel-footer text-center">

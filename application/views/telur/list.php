@@ -1,7 +1,7 @@
 <?php $this->load->view('_parts/header')?>
  <!-- PAGE TITLE -->
                 <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Data Telur</h2>
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Transaksi Telur Harian</h2>
                 </div>
                 <!-- END PAGE TITLE -->                
                 
@@ -17,7 +17,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                 <div class="card-header">
-                                    <a class="btn btn-success btn-condensed" href="<?php echo site_url('telur/tambah') ?>"><i class="fa fa-plus"></i> Tambah Telur</a>
+                                    <a class="btn btn-success btn-condensed" href="<?php echo site_url('telur/tambah') ?>"><i class="fa fa-plus"></i> Input Telur Harian</a>
                                 </div>
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Data</button>
@@ -37,24 +37,32 @@
                                         <table id="telur" class="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>Id Telur</th>
-                                                    <th>Jenis</th>
-                                                    <th>Kualitas</th>
-                                                    <th>Jumlah</th>
+                                                    <th>Id Input</th>
+                                                    <th>Tanggal Input</th>
+                                                    <th>Penanggung Jawab</th>
+                                                    <th>Kandang</th>
+                                                    <th>Jumlah (Kg)</th>
+                                                    <th>Sehat (Butir)</th>
+                                                    <th>Cacat (Butir)</th>
+                                                    <th>Kalkulasi Butir</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($telurs as $telur): ?>
                                                 <tr>
-                                                    <td><?= $telur->id_telur ?></td>
-                                                    <td><?= $telur->jenis ?></td>
-                                                    <td><?= $telur->kualitas ?></td>
+                                                    <td><?= $telur->id_input ?></td>
+                                                    <td><?= $telur->tgl_input ?></td>
+                                                    <td><?= $telur->nama ?></td>
+                                                    <td><?= $telur->nama_kandang ?></td>
                                                     <td><?= $telur->jumlah ?></td>
+                                                    <td><?= $telur->telur_sehat ?></td>
+                                                    <td><?= $telur->telur_cacat ?></td>
+                                                    <td><?= $telur->kalkulasi_butir ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('telur/ubah/'.$telur->id_telur) ?>"
+                                                        <a href="<?php echo site_url('telur/ubah/'.$telur->id_input) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('telur/hapus/'.$telur->id_telur) ?>')"
+                                                        <a onclick="deleteConfirm('<?php echo site_url('telur/hapus/'.$telur->id_input) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>

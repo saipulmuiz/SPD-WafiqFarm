@@ -24,6 +24,7 @@ class Supplier extends CI_Controller
 
     public function tambah()
     {
+        $data["title"] = "Tambah Data Supplier";
         $supplier = $this->Supplier_model;
         $validation = $this->form_validation;
         $validation->set_rules($supplier->rules());
@@ -38,6 +39,7 @@ class Supplier extends CI_Controller
 
     public function ubah($id = null)
     {
+        $data["title"] = "Ubah Data Supplier";
         if (!isset($id)) redirect('supplier');
        
         $supplier = $this->Supplier_model;

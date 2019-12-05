@@ -15,7 +15,7 @@
                     
                         <form action="<?php base_url('doc/ubah') ?>" method="post" class="form-horizontal">
 
-                        <input type="hidden" name="id" value="<?php echo $doc->id_doc?>" />
+                        <input type="hidden" name="id" value="<?php echo $doc->id_input?>" />
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -38,7 +38,7 @@
                                     <div class="col-md-6 col-xs-12">                                                                                                                                       
                                         <select class="form-control select" name="id_supplier">
                                         <?php foreach ($suppliers as $supplier): ?>
-                                            <option value="<?= $supplier->id_supplier ?>"><?= $supplier->nama ?></option>
+                                            <option value="<?= $supplier->id_supplier ?>"<?php if($supplier->id_supplier == $doc->id_supplier) echo 'selected' ?>><?= $supplier->nama ?></option>
                                         <?php endforeach; ?>
                                         </select>                                   
                                         <span class="help-block">Masukan id supplier</span>
@@ -57,7 +57,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Umur</label>
+                                    <label class="col-md-3 col-xs-12 control-label">Usia</label>
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -76,7 +76,7 @@
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control spinner_default <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $doc->jumlah ?>" required/>
+                                            <input type="text" oninput="totalHarga()" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $doc->jumlah ?>" required/>
                                         </div>    
                                         <div class="invalid-feedback">
                                             <?php echo form_error('jumlah') ?>
@@ -90,9 +90,26 @@
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-dollar"></span></span>
-                                            <input type="text" class="form-control" name="harga" value="<?= $doc->harga ?>" required/>
-                                        </div>        
+                                            <input type="text" oninput="totalHarga()" class="form-control <?php echo form_error('harga') ? 'is-invalid':'' ?>" name="harga" value="<?= $doc->harga ?>" required/>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('harga') ?>
+                                        </div>      
                                         <span class="help-block">Masukan harga doc ayam</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-12 control-label">Total Harga</label>
+                                    <div class="col-md-6 col-xs-12">                                            
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-dollar"></span></span>
+                                            <input type="text" class="form-control <?php echo form_error('total_harga') ? 'is-invalid':'' ?>" name="total_harga" value="<?= $doc->total_harga ?>" readonly/>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('total_harga') ?>
+                                        </div>      
+                                        <span class="help-block">Total harga doc ayam</span>
                                     </div>
                                 </div>
 
@@ -113,5 +130,13 @@
         <!-- END PAGE CONTENT -->
     </div>
     <!-- END PAGE CONTAINER -->
-    <?php $this->load->view('_parts/javascript')?> 
+    <?php $this->load->view('_parts/javascript')?>
+    <script type="text/javascript">
+        function totalHarga(){
+        let num1 = document.getElementsByName("jumlah")[0].value;
+        let num2 = document.getElementsByName("harga")[0].value;
+        let sum = Number(num1) * Number(num2);
+        document.getElementsByName("total_harga")[0].value = sum;
+    }
+    </script>
     <?php $this->load->view('_parts/footer')?> 
