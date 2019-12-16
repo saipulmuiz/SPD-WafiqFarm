@@ -10,7 +10,6 @@ class Pakan extends CI_Controller
         if($this->session->userdata('status') != "MASUK"){
 			redirect(base_url("otentikasi"));
 		}
-        $this->load->model("Stok_model");
         $this->load->model("Pakan_model");
         $this->load->model("Supplier_model");
         $this->load->library('form_validation');
@@ -28,37 +27,17 @@ class Pakan extends CI_Controller
     {
         $data["title"] = "Tambah Data Pakan";
         $pakan = $this->Pakan_model;
-        $update_stok = $this->Stok_model;
         $validation = $this->form_validation;
         $validation->set_rules($pakan->rules());
         $data["suppliers"]=$this->Pakan_model->get_supplier();
 
         if ($validation->run()) {
             $pakan->simpan();
-            $update_stok->update_stok_pakan();
             $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
         }
 
         $this->load->view("pakan/tambah",$data);
     }
-
-    // public function tambah_merk()
-    // {
-    //     $data["title"] = "Tambah Data Merk Pakan";
-    //     $pakan = $this->Pakan_model;
-    //     // $update_stok = $this->Stok_model;
-    //     $validation = $this->form_validation;
-    //     $validation->set_rules($pakan->rules());
-    //     $data["suppliers"]=$this->Pakan_model->get_supplier();
-
-    //     if ($validation->run()) {
-    //         $pakan->simpan();
-    //         // $update_stok->update_stok_pakan();
-    //         $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
-    //     }
-
-    //     $this->load->view("pakan/tambah_merk",$data);
-    // }
 
     public function ubah($id = null)
     {

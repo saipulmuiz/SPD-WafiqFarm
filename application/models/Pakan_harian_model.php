@@ -5,6 +5,7 @@ class Pakan_harian_model extends CI_Model
     private $_table = "tbl_pakan_harian";
 
     public $id_input;
+    public $merk;
     public $tgl_input;
     public $waktu_input;
     public $id_user;
@@ -40,6 +41,7 @@ class Pakan_harian_model extends CI_Model
     {
         $post = $this->input->post();
         $this->id_input = uniqid();
+        $this->merk = $post["merk"];
         $this->tgl_input = $post["tgl_input"];
         $this->waktu_input = $post["waktu_input"];
         $this->id_user = $post["id_user"];
@@ -52,6 +54,7 @@ class Pakan_harian_model extends CI_Model
     {
         $post = $this->input->post();
         $data= array(
+            'merk' => $post["merk"],
             'tgl_input' => $post["tgl_input"],
             'waktu_input' => $post["waktu_input"],
             'id_user' => $post["id_user"],

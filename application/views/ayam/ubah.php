@@ -16,10 +16,14 @@
                         <form action="<?php base_url('ayam/ubah') ?>" method="post" class="form-horizontal">
 
                         <input type="hidden" name="id" value="<?php echo $ayam->id_input?>" />
-
+                        <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                        <input type="hidden" class="form-control" value="<?= date('Y-m-d H:i:s'); ?>" name="tgl_update">
+                        <input type="hidden" class="form-control" value="<?= $ayam->jumlah ?>" name="old_jml">
+                        <input type="hidden" class="form-control" name="old_kandang" value="<?= $ayam->id_kandang ?>"/>
+                        
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><strong>Ubah</strong> Ayam</h3>
+                                <h3 class="panel-title"><strong>Ubah</strong> Ayam Masuk</h3>
                             <div class="panel-body">  
                                 
                                 <div class="form-group">
@@ -45,12 +49,24 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-12 control-label">Kandang Tujuan</label>
+                                    <div class="col-md-6 col-xs-12">                                                                                                                                       
+                                        <select class="form-control select" name="id_kandang">
+                                        <?php foreach ($kandangs as $kandang): ?>
+                                            <option value="<?= $kandang->id_kandang ?>"<?php if($kandang->id_kandang == $ayam->id_kandang) echo 'selected' ?>><?= $kandang->nama_kandang ?></option>
+                                        <?php endforeach; ?>
+                                        </select>
+                                        <span class="help-block">Masukan kandang tujuan</span>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">                                        
                                     <label class="col-md-3 col-xs-12 control-label">Tanggal Masuk</label>
                                     <div class="col-md-6 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                            <input type="text" class="form-control datepicker" value="<?= date('Y-m-d'); ?>" value="<?= $ayam->tgl_masuk ?>" name="tgl_masuk">                                            
+                                            <input type="text" class="form-control datepicker" value="<?= $ayam->tgl_masuk ?>" name="tgl_masuk">                                            
                                         </div>
                                         <span class="help-block">Masukan tanggal masuk ayam</span>
                                     </div>
@@ -77,7 +93,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                             <input type="text" oninput="totalHarga()" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $ayam->jumlah ?>" required/>
-                                        </div>    
+                                        </div><input type="text" id="fix_jml" class="form-control" name="fix_jml" value="0" readonly/> 
                                         <div class="invalid-feedback">
                                             <?php echo form_error('jumlah') ?>
                                         </div>                                          
@@ -137,6 +153,11 @@
         let num2 = document.getElementsByName("harga")[0].value;
         let sum = Number(num1) * Number(num2);
         document.getElementsByName("total_harga")[0].value = sum;
+
+        let num1n = document.getElementsByName("old_jml")[0].value;
+        let num2n= document.getElementsByName("jumlah")[0].value;
+        let sumn = Number(num1n) - Number(num2n);
+        document.getElementsByName("fix_jml")[0].value = sumn;
     }
     </script>
     <?php $this->load->view('_parts/footer')?> 

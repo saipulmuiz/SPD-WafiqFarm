@@ -1,7 +1,7 @@
 <?php $this->load->view('_parts/header')?>
  <!-- PAGE TITLE -->
                 <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Data Ayam</h2>
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Transaksi Ayam Masuk</h2>
                 </div>
                 <!-- END PAGE TITLE -->                
                 
@@ -18,6 +18,7 @@
                                 <div class="panel-heading">
                                 <div class="card-header">
                                     <a class="btn btn-success btn-condensed" href="<?php echo site_url('ayam/tambah') ?>"><i class="fa fa-plus"></i> Tambah Ayam</a>
+                                    <a class="btn btn-info btn-condensed" href="<?php echo site_url('ayam/laporan') ?>"><i class="fa fa-book"></i> Laporan Ayam Mati</a>
                                 </div>
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Data</button>
@@ -40,8 +41,9 @@
                                                     <th>Id Input</th>
                                                     <th>Jenis Ayam</th>
                                                     <th>Nama Supplier</th>
+                                                    <th>Kandang Tujuan</th>
                                                     <th>Tanggal Masuk</th>
-                                                    <th>Umur</th>
+                                                    <th>Usia</th>
                                                     <th>Jumlah</th>
                                                     <th>Harga Satuan</th>
                                                     <th>Total Harga</th>
@@ -54,15 +56,18 @@
                                                     <td><?= $ayam->id_input ?></td>
                                                     <td><?= $ayam->jenis ?></td>
                                                     <td><?= $ayam->nama ?></td>
+                                                    <td><?= $ayam->nama_kandang ?></td>
                                                     <td><?= $ayam->tgl_masuk ?></td>
                                                     <td><?= $ayam->umur . ' Hari'?></td>
                                                     <td><?= $ayam->jumlah ?></td>
                                                     <td><?= "Rp" . number_format("$ayam->harga",0, '', '.') ?></td>
                                                     <td><?= "Rp" . number_format("$ayam->total_harga",0, '', '.') ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('ayam/ubah/'.$ayam->id_input) ?>"
+                                                    <?php $tglIn = $ayam->tgl_masuk;$tglNow = date('Y-m-d'); if ($tglIn !== $tglNow) {echo "<p align='center'><b>Arsip</b></p>";}; ?>
+                                                        <a <?php   $tglIn = $ayam->tgl_masuk;$tglNow = date('Y-m-d');
+                                                     if ($tglIn !== $tglNow) {echo "style='display: none';";}; ?> href="<?php echo site_url('ayam/ubah/'.$ayam->id_input) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('ayam/hapus/'.$ayam->id_input) ?>')"
+                                                        <a style='display: none' onclick="deleteConfirm('<?php echo site_url('ayam/hapus/'.$ayam->id_input) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>
@@ -86,6 +91,12 @@
         <?php $this->load->view('_parts/javascript')?> 
         <?php $this->load->view('_parts/js_table')?> 
         <script>
+            if($(".datatable").length > 0){                
+                $(".datatable").dataTable({order: [[0, 'desc']]});
+                $(".datatable").on('page.dt',function () {
+                    onresize(100);
+                });
+            }
             function deleteConfirm(url){
                 $('#btn-delete').attr('href', url);
                 $('#deleteModal').modal();

@@ -15,9 +15,11 @@
                         <form id="jvalidate" action="<?php base_url('ayam/tambah') ?>" method="post" class="form-horizontal">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><strong>Tambah</strong> Ayam</h3>
+                                <h3 class="panel-title"><strong>Tambah</strong> Ayam Masuk</h3>
                             <div class="panel-body">
                                 
+                            <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                            <input type="hidden" class="form-control" value="<?= date('Y-m-d H:i:s'); ?>" name="tgl_update">
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Jenis</label>
                                     <div class="col-md-6 col-xs-12">                                            
@@ -41,6 +43,18 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-12 control-label">Pilih Kandang Tujuan</label>
+                                    <div class="col-md-6 col-xs-12">                                                                                                                                       
+                                        <select class="form-control select" name="id_kandang">
+                                        <?php foreach ($kandangs as $kandang): ?>
+                                            <option value="<?= $kandang->id_kandang ?>"><?= $kandang->nama_kandang ?></option>
+                                        <?php endforeach; ?>
+                                        </select>                                   
+                                        <span class="help-block">Masukan kandang tujuan</span>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">                                        
                                     <label class="col-md-3 col-xs-12 control-label">Tanggal Masuk</label>
                                     <div class="col-md-6 col-xs-12">
@@ -53,7 +67,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Umur</label>
+                                    <label class="col-md-3 col-xs-12 control-label">Usia</label>
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -62,7 +76,7 @@
                                         <div class="invalid-feedback">
                                             <?php echo form_error('umur') ?>
                                         </div>                                          
-                                        <span class="help-block">Masukan umur ayam (hari)</span>
+                                        <span class="help-block">Masukan usia ayam (hari)</span>
                                     </div>
                                 </div>
 

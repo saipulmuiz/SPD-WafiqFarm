@@ -8,6 +8,7 @@ class Pakan_model extends CI_Model
     public $merk;
     public $id_supplier;
     public $stok;
+    public $tgl_update;
 
     public function rules()
     {
@@ -54,20 +55,35 @@ class Pakan_model extends CI_Model
         $this->merk = $post["merk"];
         $this->id_supplier = $post["id_supplier"];
         $this->stok = $post["stok"];
+        $this->tgl_update = $post["tgl_update"];
         $this->db->insert($this->_table, $this);
     }
 
     public function updateStok()
     {
             $post = $this->input->post();
-            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok + $post[jumlah] WHERE merk = '$post[merk]'");
+            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok + $post[jumlah], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
             return $query;
     }
 
     public function updateStok_keluar()
     {
             $post = $this->input->post();
-            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - $post[jumlah] WHERE merk = '$post[merk]'");
+            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - $post[jumlah], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
+            return $query;
+    }
+
+    public function ubahStok()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - $post[fix_jml], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
+            return $query;
+    }
+
+    public function ubahStok_keluar()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok + $post[fix_jml], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
             return $query;
     }
 
@@ -77,12 +93,21 @@ class Pakan_model extends CI_Model
         $data= array(
             'merk' => $post["merk"],
             'id_supplier' => $post["id_supplier"],
-            'stok' => $post["stok"]
+            'stok' => $post["stok"],
+            'tgl_update' => $post["tgl_update"]
         );
 
        
         $this->db->where('id_pakan',$post['id']);
         $this->db->update($this->_table, $data);
+    }
+
+    function update_pakan(){
+        $kobar=$this->input->post('kobar');
+        $nabar=$this->input->post('nabar');
+        $harga=$this->input->post('harga');
+        $data=$this->m_barang->update_barang($kobar,$nabar,$harga);
+        echo json_encode($data);
     }
 
     public function delete($id)

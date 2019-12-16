@@ -8,6 +8,7 @@ class Kandang_model extends CI_Model
     public $nama_kandang;
     public $kapasitas;
     public $jml_ayam;
+    public $tgl_update;
 
     public function rules()
     {
@@ -32,12 +33,20 @@ class Kandang_model extends CI_Model
         return $this->db->get_where($this->_table, ["id_kandang" => $id])->row();
     }
 
+    public function updateKandang()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_kandang SET jml_ayam = jml_ayam - $post[jumlah], tgl_update = '$post[tgl_update]' WHERE id_kandang = '$post[id_kandang]'");
+            return $query;
+    }
+
     public function simpan()
     {
         $post = $this->input->post();
         $this->nama_kandang = $post["nama_kandang"];
         $this->kapasitas = $post["kapasitas"];
         $this->jml_ayam = $post["jml_ayam"];
+        $this->tgl_update = $post["tgl_update"];
         $this->db->insert($this->_table, $this);
     }
 
@@ -47,7 +56,8 @@ class Kandang_model extends CI_Model
         $data= array(
             'nama_kandang' => $post["nama_kandang"],
             'kapasitas' => $post["kapasitas"],
-            'jml_ayam' => $post["jml_ayam"]
+            'jml_ayam' => $post["jml_ayam"],
+            'tgl_update' => $post["tgl_update"]
         );
 
        

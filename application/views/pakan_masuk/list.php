@@ -7,8 +7,6 @@
                 
                 <!-- PAGE CONTENT WRAPPER -->
                 <div class="page-content-wrap">
-                
-                    
                     
                     <div class="row">
                         <div class="col-md-12">
@@ -32,6 +30,7 @@
                                     </div>                                    
                                     
                                 </div>
+                                <?php date_default_timezone_set('Asia/Jakarta'); ?>
                                 <div class="panel-body">
                                     <div class="table-responsive">
                                         <table id="pakan_masuk" class="table datatable">
@@ -44,11 +43,12 @@
                                                     <th>Harga /kg</th>
                                                     <th>Jumlah (Kg)</th>
                                                     <th>Total Harga</th>
-                                                    <th>Aksi</th>
+                                                    <th class="aksi">Aksi</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="show_data">
                                                 <?php foreach ($pakan_masuk as $pakan): ?>
+                                                    
                                                 <tr>
                                                     <td><?= $pakan->id_input ?></td>
                                                     <td><?= $pakan->merk ?></td>
@@ -58,9 +58,11 @@
                                                     <td><?= $pakan->jumlah ?></td>
                                                     <td><?= "Rp" . number_format("$pakan->total_harga",0, '', '.') ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('pakan_masuk/ubah/'.$pakan->id_input) ?>"
+                                                        <?php $tglIn = $pakan->tgl_masuk;$tglNow = date('Y-m-d'); if ($tglIn !== $tglNow) {echo "<p align='center'><b>Arsip</b></p>";}; ?>
+                                                        <a <?php   $tglIn = $pakan->tgl_masuk;$tglNow = date('Y-m-d');
+                                                     if ($tglIn !== $tglNow) {echo "style='display: none';";}; ?> href="<?php echo site_url('pakan_masuk/ubah/'.$pakan->id_input) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('pakan_masuk/hapus/'.$pakan->id_input) ?>')"
+                                                        <a onclick="deleteConfirm('<?php echo site_url('pakan_masuk/upStok/'.'?jumlah='.$pakan->jumlah . '?tgl_update='.date('Y-m-d') . '?merk='. $pakan->merk) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>
@@ -84,10 +86,33 @@
         <?php $this->load->view('_parts/javascript')?> 
         <?php $this->load->view('_parts/js_table')?> 
         <script>
+            if($(".datatable").length > 0){                
+                $(".datatable").dataTable({order: [[0, 'desc']]});
+                $(".datatable").on('page.dt',function () {
+                    onresize(100);
+                });
+            }
             function deleteConfirm(url){
                 $('#btn-delete').attr('href', url);
                 $('#deleteModal').modal();
             }
         </script>
-        <?php $this->load->view("_parts/modal") ?>
+        <!-- Logout Delete Confirmation-->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+                <a id="btn-delete" class="btn btn-danger" href="#">Hapus</a>
+            </div>
+            </div>
+        </div>
+        </div>
         <?php $this->load->view('_parts/footer')?> 

@@ -29,7 +29,9 @@
                                         <?php endforeach; ?>
                                         </select>                                   
                                         <span class="help-block">Pilih merk yang ada</span>
-                                    </div><a href="#" class="btn btn-success btn-condensed" data-toggle="modal" data-target="#modal_input"><i class="fa fa-plus"></i></a>
+                                        </div>
+                                    <!-- <a href="#" class="btn btn-success btn-condensed" data-toggle="modal" data-target="#modal_input"><i class="fa fa-plus"></i></a> -->
+                                    <a href="<?php echo site_url('pakan/tambah') ?>" class="btn btn-success btn-condensed"><i class="fa fa-plus"></i></a>
                                 </div>
 
                                 <div class="form-group">

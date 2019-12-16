@@ -29,7 +29,5 @@
         
         <script type="text/javascript" src="<?php echo base_url('js/plugins.js') ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('js/actions.js') ?>"></script>
-        
-        <script type="text/javascript" src="<?php echo base_url('js/demo_dashboard.js') ?>"></script>
         <!-- END TEMPLATE -->
     <!-- END SCRIPTS -->   

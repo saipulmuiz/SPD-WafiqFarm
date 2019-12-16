@@ -38,6 +38,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Id Input</th>
+                                                    <th>Merk</th>
                                                     <th>Tanggal Input</th>
                                                     <th>Waktu Kasih</th>
                                                     <th>Penanggung Jawab</th>
@@ -50,15 +51,18 @@
                                                 <?php foreach ($pakan_harian as $pakan_harian): ?>
                                                 <tr>
                                                     <td><?= $pakan_harian->id_input ?></td>
+                                                    <td><?= $pakan_harian->merk ?></td>
                                                     <td><?= $pakan_harian->tgl_input ?></td>
                                                     <td><?= $pakan_harian->waktu_input ?></td>
                                                     <td><?= $pakan_harian->nama ?></td>
                                                     <td><?= $pakan_harian->nama_kandang ?></td>
                                                     <td><?= $pakan_harian->jumlah ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('pakan_harian_harian/ubah/'.$pakan_harian->id_input) ?>"
+                                                    <?php $tglIn = $pakan_harian->tgl_input;$tglNow = date('Y-m-d'); if ($tglIn !== $tglNow) {echo "<p align='center'><b>Arsip</b></p>";}; ?>
+                                                        <a <?php   $tglIn = $pakan_harian->tgl_input;$tglNow = date('Y-m-d');
+                                                     if ($tglIn !== $tglNow) {echo "style='display: none';";}; ?> href="<?php echo site_url('pakan_harian/ubah/'.$pakan_harian->id_input) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('pakan_harian/hapus/'.$pakan_harian->id_input) ?>')"
+                                                        <a style='display: none' onclick="deleteConfirm('<?php echo site_url('pakan_harian/hapus/'.$pakan_harian->id_input) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>
@@ -82,6 +86,12 @@
         <?php $this->load->view('_parts/javascript')?> 
         <?php $this->load->view('_parts/js_table')?> 
         <script>
+            if($(".datatable").length > 0){                
+                $(".datatable").dataTable({order: [[0, 'desc']]});
+                $(".datatable").on('page.dt',function () {
+                    onresize(100);
+                });
+            }
             function deleteConfirm(url){
                 $('#btn-delete').attr('href', url);
                 $('#deleteModal').modal();

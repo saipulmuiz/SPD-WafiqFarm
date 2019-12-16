@@ -27,7 +27,7 @@
                                             <li class="divider"></li>
                                             <li><a href="#" onClick ="$('#pegawai').tableExport({type:'excel',escape:'false'});"><img src='<?php echo base_url('img/icons/xls.png') ?>' width="24"/> XLS</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#" onClick ="$('#pegawai').tableExport({type:'pdf',escape:'false'});"><img src='<?php echo base_url('img/icons/pdf.png') ?>' width="24"/> PDF</a></li>
+                                            <li><a href="#" onClick ="$('#pegawai').tableExport({type:'pdf',escape:'false',ignoreColumn: [4]});"><img src='<?php echo base_url('img/icons/pdf.png') ?>' width="24"/> PDF</a></li>
                                         </ul>
                                     </div>                                    
                                     

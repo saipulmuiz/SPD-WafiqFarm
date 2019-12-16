@@ -1,5 +1,8 @@
 <?php $this->load->view('_parts/header')?>
  <!-- PAGE TITLE -->
+ <style>
+.toltip{position:relative;display:inline-block;color: #4690ff;}.toltip .toltiptext{visibility:hidden;width:120px;background-color:#555;color:#fff;text-align:center;border-radius:6px;padding:5px 0;position:absolute;z-index:1;bottom:125%;left:50%;margin-left:-60px;opacity:0;transition:opacity .3s}.toltip .toltiptext::after{content:"";position:absolute;top:100%;left:50%;margin-left:-5px;border-width:5px;border-style:solid;border-color:#555 transparent transparent transparent}.toltip:hover .toltiptext{visibility:visible;opacity:1}
+</style>
                 <div class="page-title">                    
                     <h2><span class="fa fa-arrow-circle-o-left"></span> Data Kandang</h2>
                 </div>
@@ -41,6 +44,7 @@
                                                     <th>Nama Kandang</th>
                                                     <th>Kapasitas</th>
                                                     <th>Jumlah Ayam</th>
+                                                    <th>Terakhir Update</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -51,6 +55,13 @@
                                                     <td><?= $kandang->nama_kandang ?></td>
                                                     <td><?= $kandang->kapasitas ?></td>
                                                     <td><?= $kandang->jml_ayam ?></td>
+                                                    <td>
+                                                        <div class="toltip">
+                                                            <b><?php $dt = new DateTime($kandang->tgl_update);
+                                                            echo $dt->format('Y-m-d'); ?></b>
+                                                            <span class="toltiptext"><?= $kandang->tgl_update ?></span>
+                                                        </div>
+                                                    </td>
                                                     <td width="250">
                                                         <a href="<?php echo site_url('kandang/ubah/'.$kandang->id_kandang) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>

@@ -46,17 +46,19 @@ class Pakan_harian extends CI_Controller
     {
         $data["title"] = "Ubah Transaksi Pakan Harian";
         if (!isset($id)) redirect('pakan_harian');
-       
+        $update_stok = $this->Pakan_model;
         $pakan_harian = $this->Pakan_harian_model;
         $validation = $this->form_validation;
         $validation->set_rules($pakan_harian->rules());
 
         if ($validation->run()) {
             $pakan_harian->update();
+            $update_stok->ubahStok_keluar();
             $this->session->set_flashdata('success', 'Berhasil diubah!');
         }
 
         $data["kandangs"]=$this->Kandang_model->getAll();
+        $data["merks"]=$this->Pakan_model->getMerk();
         $data["pakan_harian"] = $pakan_harian->getById($id);
         if (!$data["pakan_harian"]) show_404();
         

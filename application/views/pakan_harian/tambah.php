@@ -17,7 +17,9 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>Transaksi</strong> Pakan Harian</h3>
                             <div class="panel-body">
-                                
+                            <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                            <input type="hidden" class="form-control" value="<?= date('Y-m-d H:i:s'); ?>" name="tgl_update">    
+
                                 <div class="form-group">                                        
                                     <label class="col-md-3 col-xs-12 control-label">Tanggal Input</label>
                                     <div class="col-md-6 col-xs-12">

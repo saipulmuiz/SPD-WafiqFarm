@@ -15,6 +15,8 @@
                         <form action="<?php base_url('pakan/ubah') ?>" method="post" class="form-horizontal">
 
                         <input type="hidden" name="id" value="<?php echo $pakan->id_pakan?>" />
+                        <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                        <input type="hidden" class="form-control" value="<?= date('Y-m-d H:i:s'); ?>" name="tgl_update">
                         
                         <div class="panel panel-default">
                             <div class="panel-heading">

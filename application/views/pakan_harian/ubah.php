@@ -5,30 +5,40 @@
                 <div class="row">
                     <div class="col-md-12">
                     <div class="card-header">
-						<a href="<?php echo site_url('telur') ?>"><i class="fa fa-arrow-left"></i> Kembali</a>
+						<a href="<?php echo site_url('pakan_harian') ?>"><i class="fa fa-arrow-left"></i> Kembali</a>
                     </div>
                     <?php if ($this->session->flashdata('success')): ?>
                     <div class="alert alert-success" role="alert">
                         <?php echo $this->session->flashdata('success'); ?>
                     </div>
                     <?php endif; ?>
-                        <form action="<?php base_url('telur/ubah') ?>" method="post" class="form-horizontal">
+                        <form action="<?php base_url('pakan_harian/ubah') ?>" method="post" class="form-horizontal">
 
-                        <input type="hidden" name="id" value="<?php echo $telur->id_input?>" />
+                        <input type="hidden" name="id" value="<?php echo $pakan_harian->id_input?>" />
+                        <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                            <input type="hidden" class="form-control" value="<?= date('Y-m-d H:i:s'); ?>" name="tgl_update">    
+                            <input type="hidden" class="form-control" value="<?= $pakan_harian->jumlah ?>" name="old_jml">
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><strong>Ubah</strong> Transaksi Telur Harian</h3>
-                            <div class="panel-body">                                                                        
-                                
-                            <div class="form-group">                                        
+                                <div class="form-group">                                        
                                     <label class="col-md-3 col-xs-12 control-label">Tanggal Input</label>
                                     <div class="col-md-6 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                            <input type="text" class="form-control datepicker" value="<?= $telur->tgl_input ?>" name="tgl_input">                                            
+                                            <input type="text" class="form-control datepicker" value="<?= $pakan_harian->tgl_input ?>" name="tgl_input">                                            
                                         </div>
-                                        <span class="help-block">Masukan tanggal input telur</span>
+                                        <span class="help-block">Masukan tanggal input pakan harian</span>
+                                    </div>
+                                </div>
+                                
+                                <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                                <div class="form-group">                                        
+                                    <label class="col-md-3 col-xs-12 control-label">Waktu Input</label>
+                                    <div class="col-md-6 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                            <input type="text" class="form-control timepicker24" value="<?= $pakan_harian->waktu_input ?>" name="waktu_input">                                            
+                                        </div>
+                                        <span class="help-block">Masukan waktu input pakan harian</span>
                                     </div>
                                 </div>
 
@@ -48,7 +58,7 @@
                                     <div class="col-md-6 col-xs-12">                                                                                                                                       
                                         <select class="form-control select" name="id_kandang">
                                         <?php foreach ($kandangs as $kandang): ?>
-                                            <option value="<?= $kandang->id_kandang ?>"<?php if($kandang->id_kandang == $telur->id_kandang) echo 'selected' ?>><?= $kandang->nama_kandang ?></option>
+                                            <option value="<?= $kandang->id_kandang ?>"<?php if($kandang->id_kandang == $pakan_harian->id_kandang) echo 'selected' ?>><?= $kandang->nama_kandang ?></option>
                                         <?php endforeach; ?>
                                         </select>                                   
                                         <span class="help-block">Masukan nama kandang</span>
@@ -56,58 +66,30 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Jumlah (Kg)</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $telur->jumlah ?>" required/>
-                                        </div>    
-                                        <div class="invalid-feedback">
-                                            <?php echo form_error('jumlah') ?>
-                                        </div>                                          
-                                        <span class="help-block">Masukan jumlah Kg telur</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Telur Sehat (Butir)</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" oninput="kalkulasiButir()" class="form-control <?php echo form_error('telur_sehat') ? 'is-invalid':'' ?>" name="telur_sehat" value="<?= $telur->telur_sehat ?>" required/>
-                                        </div>    
-                                        <div class="invalid-feedback">
-                                            <?php echo form_error('telur_sehat') ?>
-                                        </div>                                          
-                                        <span class="help-block">Masukan jumlah butir telur sehat</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Telur Cacat (Butir)</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" oninput="kalkulasiButir()" class="form-control <?php echo form_error('telur_cacat') ? 'is-invalid':'' ?>" name="telur_cacat" value="<?= $telur->telur_cacat ?>" required/>
-                                        </div>    
-                                        <div class="invalid-feedback">
-                                            <?php echo form_error('telur_cacat') ?>
-                                        </div>                                          
-                                        <span class="help-block">Masukan jumlah butir telur cacat</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Kalkulasi (Butir)</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control" name="kalkulasi_butir" value="<?= $telur->kalkulasi_butir ?>" readonly/>
-                                        </div>                                      
-                                        <span class="help-block">Kalkulasi telur keseluruhan</span>
+                                    <label class="col-md-3 col-xs-12 control-label">Merk</label>
+                                    <div class="col-md-6 col-xs-12">                                                                                                                                       
+                                        <select class="form-control select" name="merk">
+                                        <?php foreach ($merks as $merk): ?>
+                                            <option value="<?= $merk->merk ?>"<?php if($merk->merk == $pakan_harian->merk) echo 'selected' ?>><?= $merk->merk ?></option>
+                                        <?php endforeach; ?>
+                                        </select>                                   
+                                        <span class="help-block">Pilih merk pakan yang digunakan</span>
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="col-md-3 col-xs-12 control-label">Jumlah Pakan Keluar (Kg)</label>
+                                    <div class="col-md-6 col-xs-12">                                            
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            <input type="text" oninput="rangeJml()" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" value="<?= $pakan_harian->jumlah ?>" name="jumlah" required/>
+                                        </div><input type="text" id="fix_jml" class="form-control" name="fix_jml" value="0" readonly/>    
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('jumlah') ?>
+                                        </div>                                          
+                                        <span class="help-block">Masukan jumlah Kg pakan harian</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="panel-footer">
                                 <button class="btn btn-default">Clear Form</button>                                    
@@ -127,11 +109,12 @@
     <!-- END PAGE CONTAINER -->
     <?php $this->load->view('_parts/javascript')?>
     <script type="text/javascript">
-        function kalkulasiButir(){
-        let num1 = document.getElementsByName("telur_sehat")[0].value;
-        let num2 = document.getElementsByName("telur_cacat")[0].value;
-        let sum = Number(num1) + Number(num2);
-        document.getElementsByName("kalkulasi_butir")[0].value = sum;
+        function rangeJml(){
+        let num1n = document.getElementsByName("old_jml")[0].value;
+        let num2n= document.getElementsByName("jumlah")[0].value;
+        let sumn = Number(num1n) - Number(num2n);
+        document.getElementsByName("fix_jml")[0].value = sumn;
     }
     </script>
+    <script type="text/javascript" src="<?= base_url('js/plugins/bootstrap/bootstrap-timepicker.min.js') ?>"></script>
     <?php $this->load->view('_parts/footer')?> 

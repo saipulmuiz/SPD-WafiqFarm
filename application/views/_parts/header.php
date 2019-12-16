@@ -48,27 +48,40 @@
                     <li <?php if($this->uri->segment(1)=="overview"){echo 'class="active"';}?>>
                         <a href="<?=base_url('overview');?>"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboards</span></a>
                     </li>                                       
-                    <li class="xn-openable <?php $url_aktif = $this->uri->segment(1); if($url_aktif=="pegawai" || $url_aktif=="kandang" || $url_aktif=="supplier" || $url_aktif=="pakan" || $url_aktif=="doc" || $url_aktif=="ayam" || $url_aktif=="user"){echo 'active';}else{echo '';}?>">
+                    <li class="xn-openable <?php $url_aktif = $this->uri->segment(1); if($url_aktif=="pegawai" || $url_aktif=="kandang" || $url_aktif=="supplier" || $url_aktif=="pakan" || $url_aktif=="doc" || $url_aktif=="user" || $url_aktif=="vitamin"){echo 'active';}else{echo '';}?>">
                         <a href="#"><span class="fa fa-archive"></span> <span class="xn-text">Data Master</span></a>
                         <ul>
                             <li <?php if($this->uri->segment(1)=="pegawai"){echo 'class="active"';}?>><a href="<?=base_url('pegawai/');?>"><span class="fa fa-group"></span> Data Pegawai</a></li>
                             <li <?php if($this->uri->segment(1)=="kandang"){echo 'class="active"';}?>><a href="<?=base_url('kandang/');?>"><span class="fa fa-home"></span> Data Kandang</a></li>
                             <li <?php if($this->uri->segment(1)=="supplier"){echo 'class="active"';}?>><a href="<?=base_url('supplier/');?>"><span class="fa fa-users"></span> Data Supplier</a></li>
                             <li <?php if($this->uri->segment(1)=="pakan"){echo 'class="active"';}?>><a href="<?=base_url('pakan/');?>"><span class="fa fa-bitbucket"></span> Data Pakan</a></li>
+                            <li <?php if($this->uri->segment(1)=="vitamin"){echo 'class="active"';}?>><a href="<?=base_url('vitamin/');?>"><span class="fa fa-bitbucket"></span> Data Vitamin</a></li>
                             <li <?php if($this->uri->segment(1)=="doc"){echo 'class="active"';}?>><a href="<?=base_url('doc/');?>"><span class="fa fa-twitter"></span> Data DOC</a></li>                       
-                            <li <?php if($this->uri->segment(1)=="ayam"){echo 'class="active"';}?>><a href="<?=base_url('ayam/');?>"><span class="fa fa-twitter"></span> Data Ayam</a></li>
                             <li <?php if($this->uri->segment(1)=="user"){echo 'class="active"';}?>><a href="<?=base_url('user/');?>"><span class="fa fa-user"></span> Data User</a></li>                          
                         </ul>
                     </li>
-                    <li class="xn-openable <?php $url_aktif = $this->uri->segment(1); if($url_aktif=="telur" || $url_aktif=="pakan_harian" || $url_aktif=="pakan_masuk"){echo 'active';}else{echo '';}?>">
+                    <li class="xn-openable <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="telur" && $url_aktif2!=="laporan" || $url_aktif=="pakan_harian" && $url_aktif2!=="laporan" || $url_aktif=="pakan_masuk" && $url_aktif2!=="laporan" || $url_aktif=="vitamin_masuk" && $url_aktif2!=="laporan" || $url_aktif=="vitamin_pakai" && $url_aktif2!=="laporan" || $url_aktif=="ayam" && $url_aktif2!=="laporan" || $url_aktif=="ayam_mati" && $url_aktif2!=="laporan"){echo 'active';}else{echo '';}?>">
                         <a href="#"><span class="fa fa-archive"></span> <span class="xn-text">Transaksi</span></a>
                         <ul>
-                            <li <?php if($this->uri->segment(1)=="pakan_masuk"){echo 'class="active"';}?>><a href="<?=base_url('pakan_masuk/');?>"><span class="fa fa-bitbucket"></span> Pakan Masuk</a></li>
-                            <li <?php if($this->uri->segment(1)=="pegawai"){echo 'class="active"';}?>><a href="<?=base_url('pakan_harian/');?>"><span class="fa fa-bitbucket"></span> Beri Pakan</a></li>
-                            <li <?php if($this->uri->segment(1)=="telur"){echo 'class="active"';}?>><a href="<?=base_url('telur/');?>"><span class="fa fa-circle"></span><span class="xn-text"> Telur Harian</span></a></li>                          
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="vitamin_masuk" && $url_aktif2!=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('vitamin_masuk/');?>"><span class="fa fa-bitbucket"></span> Vitamin Masuk</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="vitamin_pakai" && $url_aktif2!=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('vitamin_pakai/');?>"><span class="fa fa-bitbucket"></span> Pemakaian Vitamin</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="pakan_masuk" && $url_aktif2!=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('pakan_masuk/');?>"><span class="fa fa-bitbucket"></span> Pakan Masuk</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="pakan_harian" && $url_aktif2!=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('pakan_harian/');?>"><span class="fa fa-bitbucket"></span> Beri Pakan</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="telur" && $url_aktif2!=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('telur/');?>"><span class="fa fa-circle"></span><span class="xn-text"> Telur Harian</span></a></li>                          
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="ayam" && $url_aktif2!=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('ayam/');?>"><span class="fa fa-twitter"></span> Ayam Masuk</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="ayam_mati" && $url_aktif2!=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('ayam_mati/');?>"><span class="fa fa-twitter"></span> Data Ayam Mati</a></li>
                         </ul>
                     </li>
-                    <li <?php if($this->uri->segment(1)=="stok"){echo 'class="active"';}?>><a href="<?=base_url('stok/');?>"><span class="fa fa-circle"></span><span class="xn-text"> Stok</`</a></li>                   
+                    <li class="xn-openable <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="ayam_mati" && $url_aktif2=="laporan" || $url_aktif=="ayam" && $url_aktif2=="laporan" || $url_aktif=="pakan_masuk" && $url_aktif2=="laporan " || $url_aktif=="pakan_harian" && $url_aktif2=="laporan "){echo 'active';}else{echo '';}?>">
+                        <a href="#"><span class="fa fa-archive"></span> <span class="xn-text">Laporan</span></a>
+                        <ul>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="ayam_mati" && $url_aktif2=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('ayam_mati/laporan');?>"><span class="fa fa-bitbucket"></span> Ayam Mati</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="ayam" && $url_aktif2=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('ayam/laporan');?>"><span class="fa fa-bitbucket"></span> Ayam Masuk</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="pakan_masuk" && $url_aktif2=="laporan"){echo 'class="active"';}?>><a href="<?=base_url('pakan_masuk/laporan');?>"><span class="fa fa-bitbucket"></span> Pakan Masuk</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="pakan_harian" && $url_aktif2=="laporan"){echo 'class="active"';}?>"><span class="fa fa-bitbucket"></span> Beri Pakan</a></li>
+                            <li <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="telur" && $url_aktif2=="laporan"){echo 'class="active"';}?>"><span class="fa fa-bitbucket"></span> Telur Harian</a></li>
+                        </ul>
+                    </li>
                     
                 </ul>
                 <!-- END X-NAVIGATION -->
