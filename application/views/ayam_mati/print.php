@@ -1,4 +1,7 @@
 <?php $this->load->view('_parts/head-rpt')?>
+</style>
+</head>
+<body>
     <h2>Laporan Ayam Mati</h2>
     <b><h3><?php echo $ket; ?></h3></b><br /><br />
     

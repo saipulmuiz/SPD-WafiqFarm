@@ -18,6 +18,7 @@
                                 <div class="panel-heading">
                                 <div class="card-header">
                                     <a class="btn btn-success btn-condensed" href="<?php echo site_url('telur/tambah') ?>"><i class="fa fa-plus"></i> Input Telur Harian</a>
+                                    <a class="btn btn-info btn-condensed" href="<?php echo site_url('telur/laporan') ?>"><i class="fa fa-book"></i> Laporan Telur Harian</a>
                                 </div>
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Data</button>
@@ -86,6 +87,12 @@
         <?php $this->load->view('_parts/javascript')?> 
         <?php $this->load->view('_parts/js_table')?> 
         <script>
+            if($(".datatable").length > 0){                
+                $(".datatable").dataTable({order: [[0, 'desc']]});
+                $(".datatable").on('page.dt',function () {
+                    onresize(100);
+                });
+            }
             function deleteConfirm(url){
                 $('#btn-delete').attr('href', url);
                 $('#deleteModal').modal();

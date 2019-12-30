@@ -69,34 +69,5 @@
     </div>
     <!-- END PAGE CONTAINER -->
 
-    <?php $this->load->view('_parts/javascript')?> 
-    <script type="text/javascript" src="<?= base_url('js/plugins/validationengine/languages/jquery.validationEngine-en.js') ?>"></script>
-    <script type="text/javascript" src="<?= base_url('js/plugins/validationengine/jquery.validationEngine.js') ?>"></script>  
-
-    <script type="text/javascript" src="<?= base_url('js/plugins/jquery-validation/jquery.validate.js') ?>"></script>  
-
-    <script type="text/javascript" src="<?= base_url('js/plugins/dropzone/dropzone.min.js') ?>"></script>
-    <script type="text/javascript" src="<?= base_url('js/plugins/fileinput/fileinput.min.js') ?>"></script>  
-        
-    <script type="text/javascript" src="<?= base_url('js/plugins/cropper/cropper.min.js') ?>"></script>
-        
-    <script type="text/javascript" src="js/plugins/jstree/jstree.min.js"></script>
-    <script>
-         var jvalidate = $("#jvalidate").validate({
-                ignore: [],
-                rules: {                                            
-                        password: {
-                                required: true,
-                                minlength: 5,
-                                maxlength: 10
-                        },
-                        're_password': {
-                                required: true,
-                                minlength: 5,
-                                maxlength: 10,
-                                equalTo: "#password2"
-                        }
-                    }                                        
-                }); 
-    </script>
+    <?php $this->load->view('_parts/javascript')?>
     <?php $this->load->view('_parts/footer')?> 

@@ -16,6 +16,7 @@
                                 <div class="panel-heading">
                                 <div class="card-header">
                                     <a class="btn btn-success btn-condensed" href="<?php echo site_url('pakan_masuk/tambah') ?>"><i class="fa fa-plus"></i> Tambah Pakan Masuk</a>
+                                    <a class="btn btn-info btn-condensed" href="<?php echo site_url('pakan_masuk/laporan') ?>"><i class="fa fa-book"></i> Laporan Pakan Masuk</a>
                                 </div>
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Data</button>

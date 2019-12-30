@@ -19,7 +19,14 @@ class User extends CI_Controller
         $data["title"] = "Data User";
    	    $data["actor"] = "User";
         $data["data_user"] = $this->User_model->getAll();
+        
+        if($this->session->userdata('level')=='2'){
+            echo "Anda tidak boleh mengakses halaman ini!";
+            echo "<br>";
+            echo "<button onclick='javascript:history.go(-1)'>Kembali</button>";
+        }else{
         $this->load->view('user/list',$data);
+        }
     }
 
     public function tambah()
@@ -34,7 +41,13 @@ class User extends CI_Controller
             $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
         }
 
+        if($this->session->userdata('level')=='2'){
+            echo "Anda tidak boleh mengakses halaman ini!";
+            echo "<br>";
+            echo "<button onclick='javascript:history.go(-1)'>Kembali</button>";
+        }else{
         $this->load->view("user/tambah",$data);
+        }
     }
 
     public function ubah($id = null)
@@ -54,7 +67,13 @@ class User extends CI_Controller
         $data["user"] = $user->getById($id);
         if (!$data["user"]) show_404();
         
+        if($this->session->userdata('level')=='2'){
+            echo "Anda tidak boleh mengakses halaman ini!";
+            echo "<br>";
+            echo "<button onclick='javascript:history.go(-1)'>Kembali</button>";
+        }else{
         $this->load->view("user/ubah", $data);
+        }
     }
 
     public function hapus($id=null)

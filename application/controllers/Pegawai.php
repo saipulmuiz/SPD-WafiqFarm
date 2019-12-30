@@ -19,7 +19,13 @@ class Pegawai extends CI_Controller
         $data["title"] = "Data Pegawai";
    	    $data["actor"] = "Pegawai";
         $data["data_pegawai"] = $this->Pegawai_model->getAll();
+        if($this->session->userdata('level')=='2'){
+            echo "Anda tidak boleh mengakses halaman ini!";
+            echo "<br>";
+            echo "<button onclick='javascript:history.go(-1)'>Kembali</button>";
+        }else{
         $this->load->view('pegawai/list',$data);
+        }
     }
 
     public function tambah()
@@ -33,8 +39,13 @@ class Pegawai extends CI_Controller
             $pegawai->simpan();
             $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
         }
-
+        if($this->session->userdata('level')=='2'){
+            echo "Anda tidak boleh mengakses halaman ini!";
+            echo "<br>";
+            echo "<button onclick='javascript:history.go(-1)'>Kembali</button>";
+        }else{
         $this->load->view("pegawai/tambah");
+        }
     }
 
     public function ubah($id = null)
@@ -54,7 +65,13 @@ class Pegawai extends CI_Controller
         $data["pegawai"] = $pegawai->getById($id);
         if (!$data["pegawai"]) show_404();
         
+        if($this->session->userdata('level')=='2'){
+            echo "Anda tidak boleh mengakses halaman ini!";
+            echo "<br>";
+            echo "<button onclick='javascript:history.go(-1)'>Kembali</button>";
+        }else{
         $this->load->view("pegawai/ubah", $data);
+        }
     }
 
     public function hapus($id=null)

@@ -27,6 +27,18 @@ class Overview_model extends CI_Model
         return $query->result();
     }
 
+    public function getTelur()
+    {
+        $query = $this->db->query('SELECT * FROM tbl_telur');
+        return $query->result();
+    }
+
+    public function getAyam()
+    {
+        $query = $this->db->query('SELECT * FROM tbl_ayam ORDER BY jumlah DESC LIMIT 3');
+        return $query->result();
+    }
+
     public function getTelurHarian()
     {
         $this->db->select('tgl_input,jumlah,kalkulasi_butir');

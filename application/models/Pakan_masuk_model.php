@@ -87,6 +87,40 @@ class Pakan_masuk_model extends CI_Model
             $query = $this->db->query("SELECT * FROM tbl_pakan_masuk INNER JOIN tbl_supplier ON tbl_pakan_masuk.id_supplier=tbl_supplier.id_supplier");
             return $query->result();
     }
+
+    public function getMerk()
+    {
+            $query = $this->db->query("SELECT * FROM tbl_pakan ");
+            return $query->result();
+    }
+
+    public function updateStok()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok + $post[jumlah], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
+            return $query;
+    }
+
+    public function updateStok_keluar()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - $post[jumlah], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
+            return $query;
+    }
+
+    public function ubahStok()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - $post[fix_jml], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
+            return $query;
+    }
+
+    public function ubahStok_keluar()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok + $post[fix_jml], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
+            return $query;
+    }
     
     public function getById($id)
     {
@@ -123,11 +157,11 @@ class Pakan_masuk_model extends CI_Model
         $this->db->update($this->_table, $data);
     }
 
-    public function updateStok_keluar($jml,$merks,$tgl_updates)
-    {
-            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - '$jml', tgl_update = '$tgl_updates' WHERE merk = '$merks'");
-            return $query;
-    }
+    // public function updateStok_keluar($jml,$merks,$tgl_updates)
+    // {
+    //         $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - '$jml', tgl_update = '$tgl_updates' WHERE merk = '$merks'");
+    //         return $query;
+    // }
 
     function hapus_transaksi($id_input){
         return $this->db->delete($this->_table, array("id_input" => $id_input));
@@ -137,4 +171,66 @@ class Pakan_masuk_model extends CI_Model
     {
         return $this->db->delete($this->_table, array("id_input" => $id));
     }
+
+    // Laporan Model
+    
+    public function view_by_date($date){
+        $this->db->select('*');
+        $this->db->from('tbl_pakan_masuk'); 
+        $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier=tbl_pakan_masuk.id_supplier');
+        
+        $this->db->where('DATE(tgl_masuk)', date('Y-m-d', strtotime($date))); // Tambahkan where tanggal nya
+            
+        return $this->db->get()->result();// Tampilkan data tbl_pakan_masuk sesuai tanggal yang diinput oleh user pada filter
+      }
+        
+      public function view_by_month($month, $year){
+        $this->db->select('*');
+        $this->db->from('tbl_pakan_masuk'); 
+        $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier=tbl_pakan_masuk.id_supplier');
+        
+        $this->db->where('MONTH(tgl_masuk)', $month); // Tambahkan where bulan
+        $this->db->where('YEAR(tgl_masuk)', $year); // Tambahkan where tahun
+            
+        return $this->db->get()->result(); // Tampilkan data tbl_pakan_masuk sesuai bulan dan tahun yang diinput oleh user pada filter
+      }
+        
+      public function view_by_year($year){
+        $this->db->select('*');
+        $this->db->from('tbl_pakan_masuk'); 
+        $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier=tbl_pakan_masuk.id_supplier');
+        
+        $this->db->where('YEAR(tgl_masuk)', $year); // Tambahkan where tahun
+            
+        return $this->db->get()->result(); // Tampilkan data tbl_pakan_masuk sesuai tahun yang diinput oleh user pada filter
+      }
+        
+      public function view_by_interval($tgl_awal, $tgl_akhir){
+        $this->db->select('*');
+        $this->db->from('tbl_pakan_masuk'); 
+        $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier=tbl_pakan_masuk.id_supplier');
+        
+        $CI = get_instance();
+        $CI->db->where("DATE(tgl_masuk) BETWEEN '$tgl_awal' AND '$tgl_akhir'");
+        // $this->db->where('YEAR(tgl_masuk) BETWEEN', $tgl_awal AND $tgl_akhir);
+            
+        return $this->db->get()->result(); // Tampilkan data tbl_pakan_masuk sesuai tahun yang diinput oleh user pada filter
+      }
+        
+      public function view_all(){
+        $this->db->select('*');
+        $this->db->from('tbl_pakan_masuk'); 
+        $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier=tbl_pakan_masuk.id_supplier');
+        
+        return $this->db->get()->result(); // Tampilkan semua data tbl_pakan_masuk
+      }
+        
+        public function option_tahun(){
+            $this->db->select('YEAR(tgl_masuk) AS tahun'); // Ambil Tahun dari field tgl_masuk
+            $this->db->from('tbl_pakan_masuk'); // select ke tabel tbl_pakan_masuk
+            $this->db->order_by('YEAR(tgl_masuk)'); // Urutkan berdasarkan tahun secara Ascending (ASC)
+            $this->db->group_by('YEAR(tgl_masuk)'); // Group berdasarkan tahun pada field tgl_masuk
+            
+            return $this->db->get()->result(); // Ambil data pada tabel tbl_pakan_masuk sesuai kondisi diatas
+        }
 }

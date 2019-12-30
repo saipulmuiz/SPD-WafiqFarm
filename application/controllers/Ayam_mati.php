@@ -35,6 +35,7 @@ class Ayam_mati extends CI_Controller
         if ($validation->run()) {
             $ayam_mati->simpan();
             $ayam_mati->updateKandang();
+            $ayam_mati->updateAyam();
             $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
         }
 
@@ -53,6 +54,7 @@ class Ayam_mati extends CI_Controller
         if ($validation->run()) {
             $ayam_mati->update();
             $ayam_mati->ubahStok_keluar();
+            $ayam_mati->ubahStok_Ayam();
             $this->session->set_flashdata('success', 'Berhasil diubah!');
         }
         $data["suppliers"]=$this->Ayam_mati_model->get_supplier();

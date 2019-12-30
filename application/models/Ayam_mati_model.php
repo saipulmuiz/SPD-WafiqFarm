@@ -52,7 +52,7 @@ class Ayam_mati_model extends CI_Model
 
     public function getJenisAyam()
     {
-            $query = $this->db->query("SELECT * FROM tbl_ayam_masuk ");
+            $query = $this->db->query("SELECT * FROM tbl_ayam");
             return $query->result();
     }
 
@@ -60,6 +60,20 @@ class Ayam_mati_model extends CI_Model
     {
             $post = $this->input->post();
             $query = $this->db->query("UPDATE tbl_kandang SET jml_ayam = jml_ayam - $post[jumlah], tgl_update = '$post[tgl_update]' WHERE id_kandang = '$post[id_kandang]'");
+            return $query;
+    }
+
+    public function updateAyam()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_ayam SET jumlah = jumlah - $post[jumlah] WHERE jenis = '$post[jenis]'");
+            return $query;
+    }
+
+    public function ubahStok_Ayam()
+    {
+            $post = $this->input->post();
+            $query = $this->db->query("UPDATE tbl_ayam SET jumlah = jumlah + $post[fix_jml] WHERE jenis = '$post[jenis]'");
             return $query;
     }
 

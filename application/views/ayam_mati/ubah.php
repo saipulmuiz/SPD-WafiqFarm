@@ -31,7 +31,7 @@
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control" name="jenis" value="<?= $ayam_mati->jenis ?>" required/>
+                                            <input type="text" class="form-control" name="jenis" value="<?= $ayam_mati->jenis ?>" readonly/>
                                         </div>        
                                         <span class="help-block">Masukan jenis ayam_mati</span>
                                     </div>
@@ -77,8 +77,8 @@
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" oninput="totalHarga()" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $ayam_mati->jumlah ?>" required/>
-                                        </div>    
+                                            <input type="text" oninput="jumlahAyam()" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $ayam_mati->jumlah ?>" required/>
+                                        </div><input type="text" id="fix_jml" class="form-control" name="fix_jml" value="0" readonly/> 
                                         <div class="invalid-feedback">
                                             <?php echo form_error('jumlah') ?>
                                         </div>                                          
@@ -104,4 +104,14 @@
     </div>
     <!-- END PAGE CONTAINER -->
     <?php $this->load->view('_parts/javascript')?>
+    <script type="text/javascript" src="<?php echo base_url('js/plugins/bootstrap/bootstrap-select.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/plugins/bootstrap/bootstrap-datepicker.js') ?>"></script>
+    <script type="text/javascript">
+        function jumlahAyam(){
+            let num1n = document.getElementsByName("old_jml")[0].value;
+            let num2n= document.getElementsByName("jumlah")[0].value;
+            let sumn = Number(num1n) - Number(num2n);
+            document.getElementsByName("fix_jml")[0].value = sumn;
+        }
+    </script>
     <?php $this->load->view('_parts/footer')?> 

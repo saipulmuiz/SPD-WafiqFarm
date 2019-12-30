@@ -1,8 +1,11 @@
 <?php $this->load->view('_parts/head-rpt')?>
+</style>
+</head>
+<body>
     <h2>Laporan Ayam Masuk</h2>
     <b><h3><?php echo $ket; ?></h3></b><br /><br />
     
-    <table id="ayam" class="table datatable">
+    <table id="ayam_masuk" class="table datatable">
         <thead>
             <tr>
                 <th>Id Input</th>
@@ -16,8 +19,8 @@
             </tr>
         </thead>
         <tbody>
-        <?php  if( ! empty($ayam)){ ?>
-            <?php foreach ($ayam as $data): ?>
+        <?php  if( ! empty($ayam_masuk)){ ?>
+            <?php foreach ($ayam_masuk as $data): ?>
                 <?php $tgl = date('d-m-Y', strtotime($data->tgl_masuk)) ?>
             <tr>
                 <td><?= $data->id_input ?></td>

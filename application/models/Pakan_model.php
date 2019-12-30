@@ -36,12 +36,6 @@ class Pakan_model extends CI_Model
             $query = $this->db->query("SELECT * FROM tbl_pakan INNER JOIN tbl_supplier ON tbl_pakan.id_supplier=tbl_supplier.id_supplier ");
             return $query->result();
     }
-
-    public function getMerk()
-    {
-            $query = $this->db->query("SELECT * FROM tbl_pakan ");
-            return $query->result();
-    }
     
     public function getById($id)
     {
@@ -57,34 +51,6 @@ class Pakan_model extends CI_Model
         $this->stok = $post["stok"];
         $this->tgl_update = $post["tgl_update"];
         $this->db->insert($this->_table, $this);
-    }
-
-    public function updateStok()
-    {
-            $post = $this->input->post();
-            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok + $post[jumlah], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
-            return $query;
-    }
-
-    public function updateStok_keluar()
-    {
-            $post = $this->input->post();
-            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - $post[jumlah], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
-            return $query;
-    }
-
-    public function ubahStok()
-    {
-            $post = $this->input->post();
-            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok - $post[fix_jml], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
-            return $query;
-    }
-
-    public function ubahStok_keluar()
-    {
-            $post = $this->input->post();
-            $query = $this->db->query("UPDATE tbl_pakan SET stok = stok + $post[fix_jml], tgl_update = '$post[tgl_update]' WHERE merk = '$post[merk]'");
-            return $query;
     }
 
     public function update()

@@ -1,7 +1,7 @@
 <?php $this->load->view('_parts/header')?>
  <!-- PAGE TITLE -->
                 <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Laporan Ayam Masuk</h2>
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Laporan Pakan Masuk</h2>
                 </div>
                 <!-- END PAGE TITLE -->                
                 
@@ -9,7 +9,7 @@
                 <div class="page-content-wrap">
                 <div class="container">
                 <div class="card-header">
-                    <h4><a href="<?php echo site_url('ayam') ?>"><i class="fa fa-arrow-left"></i> Data Ayam Masuk</a></h4>
+                    <h4><a href="<?php echo site_url('pakan_masuk') ?>"><i class="fa fa-arrow-left"></i> Data Pakan Masuk</a></h4>
                 </div>
                 <br>
                     <form method="get" action="">
@@ -80,16 +80,16 @@
                             <label class="col-md-2 control-label">Pilih Interval Tanggal</label>
                             <div class="col-md-5">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" autocomplete="off" name="tgl_awal" id="tanggal" value="<?= date('Y-m-d'); ?>">
+                                    <input type="text" class="form-control datepicker" autocomplete="off" name="tgl_awal" id="tgl_awal" value="<?= date('Y-m-d'); ?>">
                                     <span class="input-group-addon add-on"> - </span>
-                                    <input type="text" class="form-control datepicker" autocomplete="off" name="tgl_akhir" id="tanggal" value="<?= date('Y-m-d'); ?>">
+                                    <input type="text" class="form-control datepicker" autocomplete="off" name="tgl_akhir" id="tgl_akhir" value="<?= date('Y-m-d'); ?>">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <button class="btn btn-success" type="submit">Tampilkan</button>
-                        <a class="btn btn-primary" href="<?php echo base_url('ayam/laporan'); ?>">Reset Filter</a>
+                        <a class="btn btn-primary" href="<?php echo base_url('pakan_masuk/laporan'); ?>">Reset Filter</a>
                         <a class="btn btn-info" href="<?php echo $url_cetak; ?>" target="blank">CETAK PDF</a>
                     </div>
                     </form>
@@ -110,31 +110,27 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
-                                        <table id="ayam" class="table datatable">
+                                        <table id="pakan_masuk" class="table datatable">
                                             <thead>
                                                 <tr>
                                                     <th>Id Input</th>
-                                                    <th>Jenis Ayam</th>
+                                                    <th>Merk</th>
                                                     <th>Nama Supplier</th>
-                                                    <th>Kandang Asal</th>
                                                     <th>Tanggal Masuk</th>
-                                                    <th>Usia</th>
                                                     <th>Jumlah</th>
                                                     <th>Harga</th>
                                                     <th>Total Harga</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php  if( ! empty($ayam)){ ?>
-                                                <?php foreach ($ayam as $data): ?>
+                                            <?php  if( ! empty($pakan_masuk)){ ?>
+                                                <?php foreach ($pakan_masuk as $data): ?>
                                                     <?php $tgl = date('d-m-Y', strtotime($data->tgl_masuk)) ?>
                                                 <tr>
                                                     <td><?= $data->id_input ?></td>
-                                                    <td><?= $data->jenis ?></td>
+                                                    <td><?= $data->merk ?></td>
                                                     <td><?= $data->nama ?></td>
-                                                    <td><?= $data->nama_kandang ?></td>
                                                     <td><?= $tgl ?></td>
-                                                    <td><?= $data->umur ?></td>
                                                     <td><?= $data->jumlah ?></td>
                                                     <td><?= $data->harga ?></td>
                                                     <td><?= $data->total_harga ?></td>
@@ -159,32 +155,5 @@
         <!-- END PAGE CONTAINER -->    
         <?php $this->load->view('_parts/javascript')?> 
         <?php $this->load->view('_parts/js_table')?> 
-        <script>
-            if($(".datatable").length > 0){                
-                $(".datatable").dataTable({order: [[0, 'desc']]});
-                $(".datatable").on('page.dt',function () {
-                    onresize(100);
-                });
-            }
-
-        $('#form-tanggal, #form-bulan, #form-tahun, #form-interval').hide(); // Sebagai default kita sembunyikan form filter tanggal, bulan & tahunnya
-
-        $('#filter').change(function(){ // Ketika user memilih filter
-            if($(this).val() == '1'){ // Jika filter nya 1 (per tanggal)
-                $('#form-bulan, #form-tahun, #form-interval').hide(); // Sembunyikan form bulan, tahun dan interval
-                $('#form-tanggal').show(); // Tampilkan form tanggal
-            }else if($(this).val() == '2'){ // Jika filter nya 2 (per bulan)
-                $('#form-tanggal, #form-interval').hide(); // Sembunyikan form tanggal dan form interval
-                $('#form-bulan, #form-tahun').show(); // Tampilkan form bulan dan tahun
-            }else if($(this).val() == '3'){ // Jika filternya 3 (per tahun)
-                $('#form-tanggal, #form-bulan, #form-interval').hide(); // Sembunyikan form tanggal, bulan dan interval
-                $('#form-tahun').show(); // Tampilkan form tahun
-            }else{
-                $('#form-tanggal, #form-bulan, #form-tahun').hide();
-                $('#form-interval').show(); // Tampilkan form interval
-            }
-
-            $('#form-bulan select, #form-tahun select').val(''); // Clear data pada textbox tanggal, combobox bulan & tahun
-        });
-        </script>
+        <?php $this->load->view('_parts/js_laporan')?>
         <?php $this->load->view('_parts/footer')?> 

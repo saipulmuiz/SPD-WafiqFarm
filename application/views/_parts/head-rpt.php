@@ -19,6 +19,3 @@
       padding: 5px;
       font-size: 16px;
     }
-  </style>
-</head>
-<body>

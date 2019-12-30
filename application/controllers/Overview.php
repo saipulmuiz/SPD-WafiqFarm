@@ -30,6 +30,8 @@ class Overview extends CI_Controller
     $data["total_ayam"] = $this->Overview_model->getTotalAyam();
     $data["total_kandang"] = $this->Overview_model->getTotalKandang();
     $data["jml_telur_harian"] = $this->Overview_model->getTelurHarian();
+    $data["data_ayam"] = $this->Overview_model->getAyam();
+    $data["data_telur"] = $this->Overview_model->getTelur();
     // Grafik Jumlah (Kg) Telur Harian
     $chartJml = $this->Overview_model->getTelurHarian()->result();
     $data['jml_telur_harian'] = json_encode($chartJml);

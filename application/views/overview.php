@@ -29,12 +29,62 @@
                                 </div>                             
                             </div>         
                             <!-- END WIDGET SLIDER -->
-                            
                         </div>
+                        <!-- START WIDGET SLIDER -->
+                        <div class="col-md-3">
+                            <div class="widget widget-default widget-carousel">
+                                <div class="owl-carousel" id="owl-example">
+                                    <div>
+                                        <?php foreach ($data_telur as $telur): ?>                                 
+                                        <div class="widget-title">Stok Berat Telur</div>                                                                        
+                                        <div class="widget-subtitle">Berat Telur</div>
+                                        <div class="widget-int"><?= $telur->berat . ' Kg' ?></div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <div>                                    
+                                    <?php foreach ($data_telur as $telur): ?>                                 
+                                        <div class="widget-title">Jumlah Telur</div>                                                                        
+                                        <div class="widget-subtitle">Jumlah Telur Sehat</div>
+                                        <div class="widget-int"><?= $telur->jumlah . ' Butir' ?></div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>                            
+                                <div class="widget-controls">                                
+                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                                </div>                             
+                            </div>
+                        </div>
+                        <!-- START WIDGET SLIDER -->
+                        <div class="col-md-6">
+                            <div class="widget widget-default widget-carousel">
+                                <div class="owl-carousel" id="owl-example">
+                                <?php foreach ($data_ayam as $ayam): ?>     
+                                    <div>
+                                        <div class="widget-default widget-item-icon" onclick="location.href='<?php echo site_url('ayam') ?>';">
+                                            <div class="widget-item-left">
+                                                <div class="widget-int"><img src="<?= base_url('assets/uploads/ayam/') . $ayam->foto ?>" height="100" alt="<?= $ayam->jenis ?>" title="<?= $ayam->jenis ?>"></div>
+                                            </div>
+                                            <div class="widget-data">
+                                                <div class="widget-int num-count"><?= $ayam->jumlah ?> Ekor</div>
+                                                <div class="widget-title"><?= $ayam->jenis ?></div>
+                                                <div class="widget-subtitle">Di peternakan</div>
+                                            </div>                          
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                                </div>                            
+                                <div class="widget-controls">                                
+                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                                </div>                             
+                            </div>
+                        </div>       
+                        <!-- END WIDGET SLIDER -->     
+                    </div>
+                    <!-- END WIDGETS -->    
                         <div class="col-md-3">
                             
                             <!-- START WIDGET PEGAWAI -->
-                            <div class="widget widget-default widget-item-icon" onclick="location.href='pages-messages.html';">
+                            <div class="widget widget-default widget-item-icon" onclick="location.href='<?php echo site_url('pegawai') ?>';">
                                 <div class="widget-item-left">
                                     <span class="fa fa-user"></span>
                                 </div>                             
@@ -53,7 +103,7 @@
                         <div class="col-md-3">
                             
                             <!-- START WIDGET SUPPLIER -->
-                            <div class="widget widget-default widget-item-icon" onclick="location.href='pages-address-book.html';">
+                            <div class="widget widget-default widget-item-icon" onclick="location.href='<?php echo site_url('supplier') ?>';">
                                 <div class="widget-item-left">
                                     <span class="fa fa-users"></span>
                                 </div>
@@ -69,34 +119,6 @@
                             <!-- END WIDGET SUPPLIER -->
                             
                         </div>
-                        <div class="col-md-3">
-                            
-                            <!-- START WIDGET CLOCK -->
-                            <div class="widget widget-danger widget-padding-sm">
-                                <div class="widget-big-int plugin-clock">00:00</div>                            
-                                <div class="widget-subtitle plugin-date">Loading...</div>
-                                <div class="widget-controls">                                
-                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="left" title="Remove Widget"><span class="fa fa-times"></span></a>
-                                </div>                            
-                                <div class="widget-buttons widget-c3">
-                                    <div class="col">
-                                        <a href="#"><span class="fa fa-clock-o"></span></a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#"><span class="fa fa-bell"></span></a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#"><span class="fa fa-calendar"></span></a>
-                                    </div>
-                                </div>                            
-                            </div>                        
-                            <!-- END WIDGET CLOCK -->
-                            
-                        </div>
-                    </div>
-                    <!-- END WIDGETS -->                    
-                    
-                    <div class="row">
                         <div class="col-md-3">                        
                             <a href="<?php echo site_url('pakan') ?>" class="tile tile-default">
                                 <?php foreach ($stok_pakan as $stok): ?>
@@ -117,8 +139,7 @@
                                 <?php endforeach; ?>
                             </a>                        
                         </div>
-                    </div>
-                    
+                    </div>               
                     <div class="row">
                         <div class="col-md-6">
                             
@@ -302,6 +323,9 @@
         </div>
         <!-- END PAGE CONTAINER -->
 <?php $this->load->view('_parts/javascript')?>
+<script type="text/javascript" src="<?php echo base_url('js/plugins/morris/morris.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('js/plugins/morris/raphael-min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('js/plugins/owl/owl.carousel.min.js') ?>"></script>
 <script>
     /* Line telur harian chart */
     Morris.Line({

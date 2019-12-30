@@ -45,14 +45,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="col-md-6">
                             <a href="#">Forgot your password?</a>
                         </div>          
                         <div class="col-md-6 text-right">
                             <a href="#">Create an account</a>
                         </div>              
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <div class="col-md-12">
                             <button class="btn btn-primary btn-lg btn-block">Login</button>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="login-footer">
                     <div class="pull-left">
-                        &copy; 2015 AppName
+                        &copy; 2019 SPD-WafiqFarm
                     </div>
                     <div class="pull-right">
                         <a href="#">About</a> |

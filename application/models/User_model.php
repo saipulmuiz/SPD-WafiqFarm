@@ -81,7 +81,17 @@ class User_model extends CI_Model
     $this->load->library('upload', $config);
 
     if ($this->upload->do_upload('foto')) {
-        return $this->upload->data("file_name");
+        $upload_data = $this->upload->data("file_name");
+        $config['image_library']='gd2';
+        $config['source_image']='./assets/uploads/'.$upload_data;
+        $config['create_thumb']= FALSE;
+        $config['maintain_ratio']= TRUE;
+        $config['quality']= '50%';
+        $config['width']= 250;
+        $config['new_image']= './assets/uploads/'.$upload_data;
+        $this->load->library('image_lib', $config);
+        $this->image_lib->resize();
+        return $upload_data;
     }
     
     return "default.jpg";

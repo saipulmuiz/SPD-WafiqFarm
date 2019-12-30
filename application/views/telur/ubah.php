@@ -15,6 +15,8 @@
                         <form action="<?php base_url('telur/ubah') ?>" method="post" class="form-horizontal">
 
                         <input type="hidden" name="id" value="<?php echo $telur->id_input?>" />
+                        <input type="hidden" class="form-control" value="<?= $telur->jumlah ?>" name="old_jml">
+                        <input type="hidden" class="form-control" value="<?= $telur->telur_sehat ?>" name="old_jml_telur">
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -26,7 +28,7 @@
                                     <div class="col-md-6 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                            <input type="text" class="form-control datepicker" value="<?= $telur->tgl_input ?>" name="tgl_input">                                            
+                                            <input type="text" class="form-control datepicker" value="<?= $telur->tgl_input ?>" name="tgl_input">
                                         </div>
                                         <span class="help-block">Masukan tanggal input telur</span>
                                     </div>
@@ -60,8 +62,8 @@
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $telur->jumlah ?>" required/>
-                                        </div>    
+                                            <input type="text" oninput="beratTelur()" class="form-control <?php echo form_error('jumlah') ? 'is-invalid':'' ?>" name="jumlah" value="<?= $telur->jumlah ?>" required/>
+                                        </div><input type="text" id="fix_jml" class="form-control" name="fix_jml" value="0" readonly/> 
                                         <div class="invalid-feedback">
                                             <?php echo form_error('jumlah') ?>
                                         </div>                                          
@@ -75,7 +77,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
                                             <input type="text" oninput="kalkulasiButir()" class="form-control <?php echo form_error('telur_sehat') ? 'is-invalid':'' ?>" name="telur_sehat" value="<?= $telur->telur_sehat ?>" required/>
-                                        </div>    
+                                        </div><input type="text" id="fix_sehat" class="form-control" name="fix_sehat" value="0" readonly/> 
                                         <div class="invalid-feedback">
                                             <?php echo form_error('telur_sehat') ?>
                                         </div>                                          
@@ -126,12 +128,25 @@
     </div>
     <!-- END PAGE CONTAINER -->
     <?php $this->load->view('_parts/javascript')?>
+    <script type="text/javascript" src="<?php echo base_url('js/plugins/bootstrap/bootstrap-select.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/plugins/bootstrap/bootstrap-datepicker.js') ?>"></script>
     <script type="text/javascript">
         function kalkulasiButir(){
         let num1 = document.getElementsByName("telur_sehat")[0].value;
         let num2 = document.getElementsByName("telur_cacat")[0].value;
         let sum = Number(num1) + Number(num2);
         document.getElementsByName("kalkulasi_butir")[0].value = sum;
+
+        let num1n = document.getElementsByName("old_jml_telur")[0].value;
+        let num2n= document.getElementsByName("telur_sehat")[0].value;
+        let sumn = Number(num1n) - Number(num2n);
+        document.getElementsByName("fix_sehat")[0].value = sumn;
+    }
+    function beratTelur(){
+        let num1n = document.getElementsByName("old_jml")[0].value;
+        let num2n= document.getElementsByName("jumlah")[0].value;
+        let sumn = Number(num1n) - Number(num2n);
+        document.getElementsByName("fix_jml")[0].value = sumn;
     }
     </script>
     <?php $this->load->view('_parts/footer')?> 

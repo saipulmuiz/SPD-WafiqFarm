@@ -1,3 +1,9 @@
+<?php 
+if($this->session->userdata('level')=='2'){
+    echo "Anda tidak boleh mengakses halaman ini!";
+    echo "<br>";
+    echo "<button onclick='javascript:history.go(-1)'>Kembali</button>";
+}else{ ?>
 <?php $this->load->view('_parts/header')?>
  <!-- PAGE TITLE -->
                 <div class="page-title">                    
@@ -85,3 +91,4 @@
         </script> 
         <?php $this->load->view("_parts/modal") ?>
         <?php $this->load->view('_parts/footer')?> 
+        <?php } ?>

@@ -110,5 +110,7 @@
     </div>
     <!-- END PAGE CONTAINER -->
     <?php $this->load->view('_parts/javascript')?>
+    <script type="text/javascript" src="<?php echo base_url('js/plugins/bootstrap/bootstrap-select.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/plugins/bootstrap/bootstrap-datepicker.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('js/plugins/bootstrap/bootstrap-timepicker.min.js') ?>"></script>
     <?php $this->load->view('_parts/footer')?> 
