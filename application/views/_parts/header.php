@@ -9,21 +9,6 @@
         
         <link rel="icon" href="<?= base_url('favicon.ico') ?>" type="image/x-icon" />
         <!-- END META SECTION -->
-        
-        <script type="text/javascript">
-            document.onreadystatechange = function() { 
-                if (document.readyState !== "complete") { 
-                    pageLoadingFrame("show");
-                      
-                    document.querySelector("body").style.visibility = "hidden"; 
-                } else { 
-                    setTimeout(function(){
-                        pageLoadingFrame("hide");
-                    },1000); 
-                    document.querySelector("body").style.visibility = "visible"; 
-                } 
-            };
-        </script>
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url('css/theme-default.css') ?>"/>
         <!-- EOF CSS INCLUDE -->               
