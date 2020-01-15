@@ -63,7 +63,7 @@
                                                         <a <?php   $tglIn = $pakan->tgl_masuk;$tglNow = date('Y-m-d');
                                                      if ($tglIn !== $tglNow) {echo "style='display: none';";}; ?> href="<?php echo site_url('pakan_masuk/ubah/'.$pakan->id_input) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('pakan_masuk/upStok/'.'?jumlah='.$pakan->jumlah . '?tgl_update='.date('Y-m-d') . '?merk='. $pakan->merk) ?>')"
+                                                        <a style='display: none' onclick="deleteConfirm('<?php echo site_url('pakan_masuk/upStok/'.'?jumlah='.$pakan->jumlah . '?tgl_update='.date('Y-m-d') . '?merk='. $pakan->merk) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>

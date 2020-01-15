@@ -44,7 +44,7 @@ class Pegawai extends CI_Controller
             echo "<br>";
             echo "<button onclick='javascript:history.go(-1)'>Kembali</button>";
         }else{
-        $this->load->view("pegawai/tambah");
+        $this->load->view("pegawai/tambah", $data);
         }
     }
 

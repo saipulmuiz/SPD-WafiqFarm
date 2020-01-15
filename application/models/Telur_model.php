@@ -73,9 +73,9 @@ class Telur_model extends CI_Model
         $this->tgl_input = $post["tgl_input"];
         $this->id_user = $post["id_user"];
         $this->id_kandang = $post["id_kandang"];
-        $this->jumlah = $post["jumlah"];
-        $this->telur_sehat = $post["telur_sehat"];
-        $this->telur_cacat = $post["telur_cacat"];
+        $this->jumlah = htmlspecialchars($post["jumlah"], ENT_QUOTES);
+        $this->telur_sehat = htmlspecialchars($post["telur_sehat"], ENT_QUOTES);
+        $this->telur_cacat = htmlspecialchars($post["telur_cacat"], ENT_QUOTES);
         $this->kalkulasi_butir = $post["kalkulasi_butir"];
         $this->db->insert($this->_table, $this);
     }
@@ -87,9 +87,9 @@ class Telur_model extends CI_Model
             'tgl_input' => $post["tgl_input"],
             'id_user' => $post["id_user"],
             'id_kandang' => $post["id_kandang"],
-            'jumlah' => $post["jumlah"],
-            'telur_sehat' => $post["telur_sehat"],
-            'telur_cacat' => $post["telur_cacat"],
+            'jumlah' => htmlspecialchars($post["jumlah"], ENT_QUOTES),
+            'telur_sehat' => htmlspecialchars($post["telur_sehat"], ENT_QUOTES),
+            'telur_cacat' => htmlspecialchars($post["telur_cacat"], ENT_QUOTES),
             'kalkulasi_butir' => $post["kalkulasi_butir"],
         );
 

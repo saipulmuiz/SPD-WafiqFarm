@@ -35,12 +35,9 @@ class Pegawai_model extends CI_Model
     {
         $post = $this->input->post();
         $this->id_pegawai = uniqid();
-        $this->nama = $post["nama"];
-        $this->alamat = $post["alamat"];
-        $this->no_hp = $post["no_hp"];
-        // $this->username = strtolower(stripslashes($post["username"]));
-        // $this->password = md5($post["password"]);
-        // $this->foto = $this->_uploadImage();
+        $this->nama = htmlspecialchars($post["nama"], ENT_QUOTES);
+        $this->no_hp = htmlspecialchars($post["no_hp"], ENT_QUOTES);
+        $this->alamat = htmlspecialchars($post["alamat"], ENT_QUOTES);
         $this->db->insert($this->_table, $this);
     }
 
@@ -48,50 +45,14 @@ class Pegawai_model extends CI_Model
     {
         $post = $this->input->post();
         $this->id_pegawai = $post["id"];
-        $this->nama = $post["nama"];
-        $this->alamat = $post["alamat"];
-        $this->no_hp = $post["no_hp"];
-        // $this->username = strtolower(stripslashes($post["username"]));
-        // $this->password = md5($post["password"]);
-        // if (!empty($_FILES["foto"]["name"])) {
-        //     $this->foto = $this->_uploadImage();
-        // } else {
-        //     $this->foto = $post["old_foto"];
-        // }
+        $this->nama = htmlspecialchars($post["nama"], ENT_QUOTES);
+        $this->no_hp = htmlspecialchars($post["no_hp"], ENT_QUOTES);
+        $this->alamat = htmlspecialchars($post["alamat"], ENT_QUOTES);
         $this->db->update($this->_table, $this, array('id_pegawai' => $post['id']));
     }
 
     public function delete($id)
     {
-        // $this->_deleteImage($id);
         return $this->db->delete($this->_table, array("id_pegawai" => $id));
     }
-
-//     private function _deleteImage($id)
-// {
-//     $product = $this->getById($id);
-//     if ($product->foto != "default.jpg") {
-// 	    $filename = explode(".", $product->foto)[0];
-// 		return array_map('unlink', glob(FCPATH."assets/uploads/$filename.*"));
-//     }
-// }
-
-//     private function _uploadImage()
-// {
-//     $config['upload_path']          = './assets/uploads/';
-//     $config['allowed_types']        = 'gif|jpg|png';
-//     $config['file_name']            = $this->id_pegawai;
-//     $config['overwrite']			= true;
-//     $config['max_size']             = 1024; // 1MB
-//     // $config['max_width']            = 1024;
-//     // $config['max_height']           = 768;
-
-//     $this->load->library('upload', $config);
-
-//     if ($this->upload->do_upload('foto')) {
-//         return $this->upload->data("file_name");
-//     }
-    
-//     return "default.jpg";
-// }
 }

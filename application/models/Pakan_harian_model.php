@@ -86,7 +86,7 @@ class Pakan_harian_model extends CI_Model
         $this->waktu_input = $post["waktu_input"];
         $this->id_user = $post["id_user"];
         $this->id_kandang = $post["id_kandang"];
-        $this->jumlah = $post["jumlah"];
+        $this->jumlah = htmlspecialchars($post["jumlah"], ENT_QUOTES);
         $this->db->insert($this->_table, $this);
     }
 
@@ -99,7 +99,7 @@ class Pakan_harian_model extends CI_Model
             'waktu_input' => $post["waktu_input"],
             'id_user' => $post["id_user"],
             'id_kandang' => $post["id_kandang"],
-            'jumlah' => $post["jumlah"],
+            'jumlah' => htmlspecialchars($post["jumlah"], ENT_QUOTES),
         );
 
        

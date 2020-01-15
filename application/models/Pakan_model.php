@@ -46,9 +46,9 @@ class Pakan_model extends CI_Model
     {
         $post = $this->input->post();
         $this->id_pakan = uniqid();
-        $this->merk = $post["merk"];
+        $this->merk = htmlspecialchars($post["merk"], ENT_QUOTES);
         $this->id_supplier = $post["id_supplier"];
-        $this->stok = $post["stok"];
+        $this->stok = htmlspecialchars($post["stok"], ENT_QUOTES);
         $this->tgl_update = $post["tgl_update"];
         $this->db->insert($this->_table, $this);
     }
@@ -57,9 +57,9 @@ class Pakan_model extends CI_Model
     {
         $post = $this->input->post();
         $data= array(
-            'merk' => $post["merk"],
+            'merk' => htmlspecialchars($post["merk"], ENT_QUOTES),
             'id_supplier' => $post["id_supplier"],
-            'stok' => $post["stok"],
+            'stok' => htmlspecialchars($post["stok"], ENT_QUOTES),
             'tgl_update' => $post["tgl_update"]
         );
 
@@ -68,13 +68,13 @@ class Pakan_model extends CI_Model
         $this->db->update($this->_table, $data);
     }
 
-    function update_pakan(){
-        $kobar=$this->input->post('kobar');
-        $nabar=$this->input->post('nabar');
-        $harga=$this->input->post('harga');
-        $data=$this->m_barang->update_barang($kobar,$nabar,$harga);
-        echo json_encode($data);
-    }
+    // function update_pakan(){
+    //     $kobar=$this->input->post('kobar');
+    //     $nabar=$this->input->post('nabar');
+    //     $harga=$this->input->post('harga');
+    //     $data=$this->m_barang->update_barang($kobar,$nabar,$harga);
+    //     echo json_encode($data);
+    // }
 
     public function delete($id)
     {

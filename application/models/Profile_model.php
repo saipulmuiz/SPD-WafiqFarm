@@ -26,7 +26,7 @@ class Profile_model extends CI_Model
     {
         $post = $this->input->post();
         $data= array(
-            'nama' => $post["nama"],
+            'nama' => htmlspecialchars($post["nama"], ENT_QUOTES),
         );
        
         $this->db->where('id_user',$post['id']);

@@ -29,24 +29,13 @@ class Supplier_model extends CI_Model
         return $this->db->get_where($this->_table, ["id_supplier" => $id])->row();
     }
 
-    // public function simpan(){
-    //     $data= array(
-    //         'id_supplier'                  => uniqid(),
-    //         'nama'                 => $this->input->post("nama"),
-    //         'alamat'                => $this->input->post("alamat"),
-    //         'no_telp'                => $this->input->post("no_telp"),
-    //         'jenis_supply'       => $this->input->post("jenis_supply")
-    //     );
-    //     return $this->db->insert($this->_table, $data);
-    // }
-
     public function simpan()
     {
         $post = $this->input->post();
-        $this->id_supplier = $post["id_supplier"];
-        $this->nama = $post["nama"];
-        $this->alamat = $post["alamat"];
-        $this->no_telp = $post["no_telp"];
+        $this->id_supplier = uniqid();
+        $this->nama = htmlspecialchars($post["nama"], ENT_QUOTES);
+        $this->alamat = htmlspecialchars($post["alamat"], ENT_QUOTES);
+        $this->no_telp = htmlspecialchars($post["no_telp"], ENT_QUOTES);
         $this->jenis_supply = $post["jenis_supply"];
         $this->db->insert($this->_table, $this);
     }
@@ -55,9 +44,9 @@ class Supplier_model extends CI_Model
     {
         $post = $this->input->post();
         $this->id_supplier = $post["id"];
-        $this->nama = $post["nama"];
-        $this->alamat = $post["alamat"];
-        $this->no_telp = $post["no_telp"];
+        $this->nama = htmlspecialchars($post["nama"], ENT_QUOTES);
+        $this->alamat = htmlspecialchars($post["alamat"], ENT_QUOTES);
+        $this->no_telp = htmlspecialchars($post["no_telp"], ENT_QUOTES);
         $this->jenis_supply = $post["jenis_supply"];
         $this->db->update($this->_table, $this, array('id_supplier' => $post['id']));
     }

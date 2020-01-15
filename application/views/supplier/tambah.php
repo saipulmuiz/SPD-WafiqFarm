@@ -17,17 +17,6 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>Tambah</strong> Supplier</h3>
                             <div class="panel-body">                                                                        
-                                
-                                <div class="form-group">
-                                    <label class="col-md-3 col-xs-12 control-label">Id Supplier</label>
-                                    <div class="col-md-6 col-xs-12">                                            
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control" name="id_supplier" required/>
-                                        </div>       
-                                        <span class="help-block">Masukan id supplier ayam</span>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Nama</label>
                                     <div class="col-md-6 col-xs-12">                                            

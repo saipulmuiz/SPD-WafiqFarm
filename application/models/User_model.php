@@ -33,8 +33,8 @@ class User_model extends CI_Model
     {
         $post = $this->input->post();
         $this->id_user = uniqid();
-        $this->nama = $post["nama"];
-        $this->username = strtolower(stripslashes($post["username"]));
+        $this->nama = htmlspecialchars($post["nama"], ENT_QUOTES);
+        $this->username = htmlspecialchars(strtolower(stripslashes($post["username"])), ENT_QUOTES);
         $this->password = md5($post["password"]);
         $this->level = $post["level"];
         $this->foto = $this->_uploadImage();
@@ -45,7 +45,7 @@ class User_model extends CI_Model
     {
         $post = $this->input->post();
         $data= array(
-            'nama' => $post["nama"],
+            'nama' => htmlspecialchars($post["nama"], ENT_QUOTES),
             'level' => $post["level"],
         );
        

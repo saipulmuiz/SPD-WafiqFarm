@@ -111,9 +111,9 @@ class Ayam_masuk_model extends CI_Model
         $this->id_supplier = $post["id_supplier"];
         $this->id_kandang = $post["id_kandang"];
         $this->tgl_masuk = $post["tgl_masuk"];
-        $this->umur = $post["umur"];
-        $this->jumlah = $post["jumlah"];
-        $this->harga = $post["harga"];
+        $this->umur = htmlspecialchars($post["umur"], ENT_QUOTES);
+        $this->jumlah = htmlspecialchars($post["jumlah"], ENT_QUOTES);
+        $this->harga = htmlspecialchars($post["harga"], ENT_QUOTES);
         $this->total_harga = $post["total_harga"];
         $this->db->insert($this->_table, $this);
     }
@@ -126,9 +126,9 @@ class Ayam_masuk_model extends CI_Model
             'id_supplier' => $post["id_supplier"],
             'id_kandang' => $post["id_kandang"],
             'tgl_masuk' => $post["tgl_masuk"],
-            'umur' => $post["umur"],
-            'jumlah' => $post["jumlah"],
-            'harga' => $post["harga"],
+            'umur' => htmlspecialchars($post["umur"], ENT_QUOTES),
+            'jumlah' => htmlspecialchars($post["jumlah"], ENT_QUOTES),
+            'harga' => htmlspecialchars($post["harga"], ENT_QUOTES),
             'total_harga' => $post["total_harga"]
         );
 

@@ -43,9 +43,9 @@ class Kandang_model extends CI_Model
     public function simpan()
     {
         $post = $this->input->post();
-        $this->nama_kandang = $post["nama_kandang"];
-        $this->kapasitas = $post["kapasitas"];
-        $this->jml_ayam = $post["jml_ayam"];
+        $this->nama_kandang = htmlspecialchars($post["nama_kandang"], ENT_QUOTES);
+        $this->kapasitas = htmlspecialchars($post["kapasitas"], ENT_QUOTES);
+        $this->jml_ayam = htmlspecialchars($post["jml_ayam"], ENT_QUOTES);
         $this->tgl_update = $post["tgl_update"];
         $this->db->insert($this->_table, $this);
     }
@@ -54,9 +54,9 @@ class Kandang_model extends CI_Model
     {
         $post = $this->input->post();
         $data= array(
-            'nama_kandang' => $post["nama_kandang"],
-            'kapasitas' => $post["kapasitas"],
-            'jml_ayam' => $post["jml_ayam"],
+            'nama_kandang' => htmlspecialchars($post["nama_kandang"], ENT_QUOTES),
+            'kapasitas' => htmlspecialchars($post["kapasitas"], ENT_QUOTES),
+            'jml_ayam' => htmlspecialchars($post["jml_ayam"], ENT_QUOTES),
             'tgl_update' => $post["tgl_update"]
         );
 

@@ -10,9 +10,23 @@
         <link rel="icon" href="<?= base_url('favicon.ico') ?>" type="image/x-icon" />
         <!-- END META SECTION -->
         
+        <script type="text/javascript">
+            document.onreadystatechange = function() { 
+                if (document.readyState !== "complete") { 
+                    pageLoadingFrame("show");
+                      
+                    document.querySelector("body").style.visibility = "hidden"; 
+                } else { 
+                    setTimeout(function(){
+                        pageLoadingFrame("hide");
+                    },1000); 
+                    document.querySelector("body").style.visibility = "visible"; 
+                } 
+            };
+        </script>
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url('css/theme-default.css') ?>"/>
-        <!-- EOF CSS INCLUDE -->                   
+        <!-- EOF CSS INCLUDE -->               
     </head>
     <body>
         <!-- START PAGE CONTAINER -->
@@ -59,7 +73,6 @@
                             <li <?php if($this->uri->segment(1)=="supplier"){echo 'class="active"';}?>><a href="<?=base_url('supplier/');?>"><span class="fa fa-users"></span> Data Supplier</a></li>
                             <li <?php if($this->uri->segment(1)=="pakan"){echo 'class="active"';}?>><a href="<?=base_url('pakan/');?>"><span class="fa fa-bitbucket"></span> Data Pakan</a></li>
                             <li <?php if($this->uri->segment(1)=="vitamin"){echo 'class="active"';}?>><a href="<?=base_url('vitamin/');?>"><span class="fa fa-bitbucket"></span> Data Vitamin</a></li>
-                            <li <?php if($this->uri->segment(1)=="doc"){echo 'class="active"';}?>><a href="<?=base_url('doc/');?>"><span class="fa fa-twitter"></span> Data DOC</a></li>
                         </ul>
                     </li>
                     <li class="xn-openable <?php $url_aktif = $this->uri->segment(1);$url_aktif2 = $this->uri->segment(2); if($url_aktif=="telur" && $url_aktif2!=="laporan" || $url_aktif=="pakan_harian" && $url_aktif2!=="laporan" || $url_aktif=="pakan_masuk" && $url_aktif2!=="laporan" || $url_aktif=="vitamin_masuk" && $url_aktif2!=="laporan" || $url_aktif=="vitamin_pakai" && $url_aktif2!=="laporan" || $url_aktif=="ayam_masuk" && $url_aktif2!=="laporan" || $url_aktif=="ayam_mati" && $url_aktif2!=="laporan"){echo 'active';}else{echo '';}?>">
@@ -149,7 +162,7 @@
                     </li> 
                     <!-- END POWER OFF -->                    
                     <!-- MESSAGES -->
-                    <li class="xn-icon-button pull-right">
+                    <!-- <li class="xn-icon-button pull-right">
                         <a href="#"><span class="fa fa-comments"></span></a>
                         <div class="informer informer-danger">4</div>
                         <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
@@ -183,7 +196,7 @@
                                 <a href="pages-messages.html">Show all messages</a>
                             </div>                            
                         </div>                        
-                    </li>
+                    </li> -->
                     <!-- END MESSAGES -->
                 </ul>
                 <!-- END X-NAVIGATION VERTICAL -->                     

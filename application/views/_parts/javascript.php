@@ -16,17 +16,4 @@
         <script type="text/javascript" src="<?php echo base_url('js/plugins.js') ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('js/actions.js') ?>"></script>
         <!-- END TEMPLATE -->
-        <script type="text/javascript">
-            document.onreadystatechange = function() { 
-                if (document.readyState !== "complete") { 
-                    pageLoadingFrame("show");
-                    setTimeout(function(){
-                        pageLoadingFrame("hide");
-                    },1500);   
-                    document.querySelector("body").style.visibility = "hidden"; 
-                } else { 
-                    document.querySelector("body").style.visibility = "visible"; 
-                } 
-            };
-        </script>
     <!-- END SCRIPTS -->   

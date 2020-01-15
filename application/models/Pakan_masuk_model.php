@@ -134,8 +134,8 @@ class Pakan_masuk_model extends CI_Model
         $this->merk = $post["merk"];
         $this->id_supplier = $post["id_supplier"];
         $this->tgl_masuk = $post["tgl_masuk"];
-        $this->harga = $post["harga"];
-        $this->jumlah = $post["jumlah"];
+        $this->harga = htmlspecialchars($post["harga"], ENT_QUOTES);
+        $this->jumlah = htmlspecialchars($post["jumlah"], ENT_QUOTES);
         $this->total_harga = $post["total_harga"];
         $this->db->insert($this->_table, $this);
     }
@@ -147,8 +147,8 @@ class Pakan_masuk_model extends CI_Model
             'merk' => $post["merk"],
             'id_supplier' => $post["id_supplier"],
             'tgl_masuk' => $post["tgl_masuk"],
-            'harga' => $post["harga"],
-            'jumlah' => $post["jumlah"],
+            'harga' => htmlspecialchars($post["harga"], ENT_QUOTES),
+            'jumlah' => htmlspecialchars($post["jumlah"], ENT_QUOTES),
             'total_harga' => $post["total_harga"]
         );
 

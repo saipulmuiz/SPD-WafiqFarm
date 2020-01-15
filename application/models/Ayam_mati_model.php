@@ -97,7 +97,7 @@ class Ayam_mati_model extends CI_Model
         $this->id_supplier = $post["id_supplier"];
         $this->id_kandang = $post["id_kandang"];
         $this->tgl_mati = $post["tgl_mati"];
-        $this->jumlah = $post["jumlah"];
+        $this->jumlah = htmlspecialchars($post["jumlah"], ENT_QUOTES);
         $this->db->insert($this->_table, $this);
     }
 
@@ -109,7 +109,7 @@ class Ayam_mati_model extends CI_Model
             'id_supplier' => $post["id_supplier"],
             'id_kandang' => $post["id_kandang"],
             'tgl_mati' => $post["tgl_mati"],
-            'jumlah' => $post["jumlah"]
+            'jumlah' => htmlspecialchars($post["jumlah"], ENT_QUOTES)
         );
 
        

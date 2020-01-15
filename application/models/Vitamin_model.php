@@ -45,9 +45,9 @@ class Vitamin_model extends CI_Model
     {
         $post = $this->input->post();
         $this->id_vitamin = uniqid();
-        $this->merk = $post["merk"];
+        $this->merk = htmlspecialchars($post["merk"], ENT_QUOTES);
         $this->id_supplier = $post["id_supplier"];
-        $this->stok = $post["stok"];
+        $this->stok = htmlspecialchars($post["stok"], ENT_QUOTES);
         $this->db->insert($this->_table, $this);
     }
 
@@ -55,9 +55,9 @@ class Vitamin_model extends CI_Model
     {
         $post = $this->input->post();
         $data= array(
-            'merk' => $post["merk"],
+            'merk' => htmlspecialchars($post["merk"], ENT_QUOTES),
             'id_supplier' => $post["id_supplier"],
-            'stok' => $post["stok"]
+            'stok' => htmlspecialchars($post["stok"], ENT_QUOTES)
         );
 
        

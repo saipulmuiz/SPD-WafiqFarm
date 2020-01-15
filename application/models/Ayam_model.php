@@ -32,8 +32,8 @@ class Ayam_model extends CI_Model
     {
         $post = $this->input->post();
         $this->id_ayam = uniqid();
-        $this->jenis = $post["jenis"];
-        $this->jumlah = $post["jumlah"];
+        $this->jenis = htmlspecialchars($post["jenis"], ENT_QUOTES);
+        $this->jumlah = htmlspecialchars($post["jumlah"], ENT_QUOTES);
         $this->foto = $this->_uploadImage();
         $this->db->insert($this->_table, $this);
     }
@@ -76,8 +76,8 @@ class Ayam_model extends CI_Model
                     $image_name=$this->input->post('old_foto');
                 }
         $data= array(
-            'jenis' => $post["jenis"],
-            'jumlah' => $post["jumlah"],
+            'jenis' => htmlspecialchars($post["jenis"], ENT_QUOTES),
+            'jumlah' => htmlspecialchars($post["jumlah"], ENT_QUOTES),
             'foto' => $image_name
         );
 

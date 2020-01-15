@@ -34,7 +34,7 @@ class Supplier extends CI_Controller
             $this->session->set_flashdata('success', 'Berhasil ditambahkan!');
         }
 
-        $this->load->view("supplier/tambah");
+        $this->load->view("supplier/tambah",$data);
     }
 
     public function ubah($id = null)
