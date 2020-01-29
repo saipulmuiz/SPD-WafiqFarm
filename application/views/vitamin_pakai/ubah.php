@@ -40,7 +40,7 @@
                                     <div class="col-md-6 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                                            <input type="text" class="form-control timepicker24" value="<?= $vitamin_pakai->waktu_input ?>" name="waktu_input">                                            
+                                            <input type="text" class="form-control timepicker24" value="<?= $vitamin_pakai->waktu_input ?>" name="waktu_input" readonly>
                                         </div>
                                         <span class="help-block">Masukan waktu input pemakaian vitamin</span>
                                     </div>
@@ -71,12 +71,13 @@
 
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Merk</label>
-                                    <div class="col-md-6 col-xs-12">                                                                                                                                       
-                                        <select class="form-control select" name="merk">
+                                    <div class="col-md-6 col-xs-12">       
+                                    <input type="text" class="form-control" name="merk" value="<?= $vitamin_pakai->merk ?>" required readonly/>
+                                        <!-- <select class="form-control select" name="merk">
                                         <?php foreach ($merks as $merk): ?>
                                             <option value="<?= $merk->merk ?>" <?php if($merk->merk == $vitamin_pakai->merk) echo 'selected' ?>><?= $merk->merk ?></option>
                                         <?php endforeach; ?>
-                                        </select>                                   
+                                        </select>                                    -->
                                         <span class="help-block">Pilih merk vitamin yang digunakan</span>
                                     </div>
                                 </div>

@@ -51,8 +51,9 @@
 
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Kandang Tujuan</label>
-                                    <div class="col-md-6 col-xs-12">                                                                                                                                       
-                                        <select class="form-control select" name="id_kandang">
+                                    <div class="col-md-6 col-xs-12">                                    
+                                    <input type="hidden" class="form-control" name="id_kandang" value="<?= $ayam_masuk->id_kandang ?>" required readonly/>
+                                        <select class="form-control select" name="nama_kandang" disabled>
                                         <?php foreach ($kandangs as $kandang): ?>
                                             <option value="<?= $kandang->id_kandang ?>"<?php if($kandang->id_kandang == $ayam_masuk->id_kandang) echo 'selected' ?>><?= $kandang->nama_kandang ?></option>
                                         <?php endforeach; ?>

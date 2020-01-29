@@ -36,7 +36,7 @@
                                     <div class="col-md-6 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                                            <input type="text" class="form-control timepicker24" value="<?= $pakan_harian->waktu_input ?>" name="waktu_input">                                            
+                                            <input type="text" class="form-control timepicker24" value="<?= $pakan_harian->waktu_input ?>" name="waktu_input" readonly>
                                         </div>
                                         <span class="help-block">Masukan waktu input pakan harian</span>
                                     </div>
@@ -67,12 +67,13 @@
 
                                 <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Merk</label>
-                                    <div class="col-md-6 col-xs-12">                                                                                                                                       
-                                        <select class="form-control select" name="merk">
+                                    <div class="col-md-6 col-xs-12">
+                                    <input type="text" class="form-control" name="merk" value="<?= $pakan_harian->merk ?>" required readonly/>
+                                        <!-- <select class="form-control select" name="merk">
                                         <?php foreach ($merks as $merk): ?>
                                             <option value="<?= $merk->merk ?>"<?php if($merk->merk == $pakan_harian->merk) echo 'selected' ?>><?= $merk->merk ?></option>
                                         <?php endforeach; ?>
-                                        </select>                                   
+                                        </select>                                    -->
                                         <span class="help-block">Pilih merk pakan yang digunakan</span>
                                     </div>
                                 </div>

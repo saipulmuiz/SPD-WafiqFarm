@@ -61,9 +61,11 @@
                                                     <td><?= $telur->telur_cacat ?></td>
                                                     <td><?= $telur->kalkulasi_butir ?></td>
                                                     <td width="250">
-                                                        <a href="<?php echo site_url('telur/ubah/'.$telur->id_input) ?>"
+                                                        <?php $tglIn = $telur->tgl_input;$tglNow = date('Y-m-d'); if ($tglIn !== $tglNow) {echo "<p align='center'><b>Arsip</b></p>";}; ?>
+                                                        <a <?php   $tglIn = $telur->tgl_input;$tglNow = date('Y-m-d');
+                                                     if ($tglIn !== $tglNow) {echo "style='display: none';";}; ?> href="<?php echo site_url('telur/ubah/'.$telur->id_input) ?>"
                                                         class="btn btn-small"><i class="fa fa-edit"></i> Ubah</a>
-                                                        <a onclick="deleteConfirm('<?php echo site_url('telur/hapus/'.$telur->id_input) ?>')"
+                                                        <a style='display: none' onclick="deleteConfirm('<?php echo site_url('telur/hapus/'.'?jumlah='.$telur->jumlah . '?tgl_update='.date('Y-m-d') . '?merk='. $telur->merk) ?>')"
                                                         href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                                     </td>
                                                 </tr>

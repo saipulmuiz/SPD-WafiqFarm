@@ -29,7 +29,7 @@
                                     <div class="col-md-6 col-xs-12">                                            
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                            <input type="text" class="form-control" name="merk" value="<?= $vitamin_masuk->merk ?>" required/>
+                                            <input type="text" class="form-control" name="merk" value="<?= $vitamin_masuk->merk ?>" required readonly>
                                         </div>        
                                         <span class="help-block">Masukan merk vitamin ayam</span>
                                     </div>
@@ -53,7 +53,7 @@
                                     <div class="col-md-6 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                            <input type="text" class="form-control datepicker" value="<?= $vitamin_masuk->tgl_masuk ?>" name="tgl_masuk">                                            
+                                            <input type="text" class="form-control datepicker" value="<?= $vitamin_masuk->tgl_masuk ?>" name="tgl_masuk">
                                         </div>
                                         <span class="help-block">Masukan tanggal masuk vitamin</span>
                                     </div>

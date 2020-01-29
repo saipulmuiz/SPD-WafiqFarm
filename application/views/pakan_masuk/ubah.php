@@ -27,12 +27,12 @@
                             <div class="form-group">
                                     <label class="col-md-3 col-xs-12 control-label">Merk</label>
                                     <div class="col-md-6 col-xs-12">  
-                                                                                                                                                                            
-                                    <select class="form-control select" name="merk">
+                                    <input type="text" class="form-control" name="merk" value="<?= $pakan_masuk->merk ?>" required readonly/>                                                                                                                                   
+                                    <!-- <select class="form-control select" name="merk">
                                         <?php foreach ($merks as $merk): ?>
                                             <option value="<?= $merk->merk ?>"<?php if($merk->merk == $pakan_masuk->merk) echo 'selected' ?>><?= $merk->merk ?></option>
                                         <?php endforeach; ?>
-                                        </select>                                  
+                                    </select> -->
                                         <span class="help-block">Pilih merk yang ada</span>
                                     </div>
                                 </div>

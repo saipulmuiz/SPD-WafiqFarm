@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Jan 2020 pada 14.39
+-- Waktu pembuatan: 26 Jan 2020 pada 12.31
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -40,9 +40,10 @@ CREATE TABLE `tbl_ayam` (
 --
 
 INSERT INTO `tbl_ayam` (`id_ayam`, `jenis`, `jumlah`, `foto`) VALUES
-('5df8df7255776', 'Ayam Kalkun Super', 105, '5df8df72557761.png'),
+('5df8df7255776', 'Ayam Kalkun Super', 123, '5df8df72557761.png'),
 ('5df8dff094d0c', 'Ayam Petelur Majalengka', 60, '5df8dff094d0c1.png'),
-('5df8ea41ef1af', 'Ayam Petelur Panjalu', 300, '5df8ea41ef1af1.png');
+('5df8ea41ef1af', 'Ayam Petelur Panjalu', 300, '5df8ea41ef1af1.png'),
+('5e200eb26542f', 'Ayam Ayaman', 20, 'default.jpg');
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,8 @@ INSERT INTO `tbl_ayam_masuk` (`id_input`, `jenis`, `id_kandang`, `id_supplier`, 
 ('5dee5ce5c81c6', 'Ayam Kalkun Super', 42, '489289289', '2019-12-09', 14, 90, 14500, 1305000),
 ('5def44fe601de', 'Ayam Kalkun Super', 42, '5829583985938', '2019-12-10', 13, 30, 13000, 390000),
 ('5df8cd3cf0f6f', 'Ayam Kalkun Super', 42, '489289289', '2019-12-17', 10, 120, 3500, 420000),
-('5df8e02b0473d', 'Ayam Kalkun Super', 42, '4902842828', '2019-12-17', 15, 10, 4500, 45000);
+('5df8e02b0473d', 'Ayam Kalkun Super', 42, '4902842828', '2019-12-17', 15, 10, 4500, 45000),
+('5e2c6b6f83747', 'Ayam Kalkun Super', 0, '5829583985938', '2020-01-25', 20, 20, 14000, 280000);
 
 -- --------------------------------------------------------
 
@@ -96,7 +98,8 @@ INSERT INTO `tbl_ayam_mati` (`id_input`, `jenis`, `id_kandang`, `id_supplier`, `
 ('5def61e8bc216', 'Ayam Kalkun Super', 42, '489289289', '2019-12-10', 5),
 ('5def6273eb05f', 'Ayam Kalkun Super', 42, '489289289', '2019-12-10', 5),
 ('5def629d12f22', 'Ayam Kalkun Super', 42, '489289289', '2019-12-10', 5),
-('5df8e25a260d2', 'Ayam Kalkun Super', 42, '489289289', '2019-12-17', 5);
+('5df8e25a260d2', 'Ayam Kalkun Super', 42, '489289289', '2019-12-17', 5),
+('5e2c6fa67f70b', 'Ayam Kalkun Super', 42, '489289289', '2020-01-25', 2);
 
 -- --------------------------------------------------------
 
@@ -141,7 +144,7 @@ CREATE TABLE `tbl_kandang` (
 --
 
 INSERT INTO `tbl_kandang` (`id_kandang`, `nama_kandang`, `kapasitas`, `jml_ayam`, `tgl_update`) VALUES
-(42, 'Kandang A', 1200, 230, '2019-12-17 21:18:05'),
+(42, 'Kandang A', 1200, 248, '2020-01-25 23:42:28'),
 (43, 'Kandang B', 1000, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -175,8 +178,9 @@ CREATE TABLE `tbl_pakan` (
 --
 
 INSERT INTO `tbl_pakan` (`id_pakan`, `merk`, `id_supplier`, `stok`, `tgl_update`) VALUES
-('5de7310bd2bd3', 'ABX01', '4902842828', 100, '2019-12-11 19:31:23'),
-('5de7d20d31551', 'ABX02', '5829583985938', 150, '2019-12-08 11:03:25');
+('5de7310bd2bd3', 'ABX01', '4902842828', 110, '2020-01-25 23:19:10'),
+('5de7d20d31551', 'ABX02', '5829583985938', 150, '2019-12-08 11:03:25'),
+('5e200e3b07d0e', 'ABT01', '5e094dfd7a95f', 200, '2020-01-16 14:17:13');
 
 -- --------------------------------------------------------
 
@@ -207,7 +211,8 @@ INSERT INTO `tbl_pakan_harian` (`id_input`, `merk`, `tgl_input`, `waktu_input`, 
 ('5dec7c55ed9e0', 'ABX02', '2019-12-08', '11:30:01', '5de1b2c6d81cc', 42, 5),
 ('5dec7cb398a24', 'ABX01', '2019-12-08', '11:30:14', '5de1b2c6d81cc', 42, 5),
 ('5dec7cd6a3193', 'ABX01', '2019-12-08', '11:31:58', '5de1b2c6d81cc', 42, 5),
-('5ded0ecb3806b', 'ABX01', '2019-12-08', '21:54:55', '5de1b2c6d81cc', 42, 10);
+('5ded0ecb3806b', 'ABX01', '2019-12-08', '21:54:55', '5de1b2c6d81cc', 42, 10),
+('5e2c6a88c5c44', 'ABX01', '2020-01-25', '23:19:10', '5de1b2c6d81cc', 42, 5);
 
 -- --------------------------------------------------------
 
@@ -231,7 +236,8 @@ CREATE TABLE `tbl_pakan_masuk` (
 
 INSERT INTO `tbl_pakan_masuk` (`id_input`, `merk`, `id_supplier`, `tgl_masuk`, `jumlah`, `harga`, `total_harga`) VALUES
 ('5de73138ead97', 'ABX02', '489289289', '2019-12-04', 30, 3000, 90000),
-('5de84f97debac', 'ABX02', '4902842828', '2019-12-05', 10, 3000, 30000);
+('5de84f97debac', 'ABX02', '4902842828', '2019-12-05', 10, 3000, 30000),
+('5e2c69bf96491', 'ABX01', '5e094dfd7a95f', '2020-01-25', 15, 4000, 60000);
 
 -- --------------------------------------------------------
 
@@ -278,9 +284,7 @@ INSERT INTO `tbl_supplier` (`id_supplier`, `nama`, `alamat`, `no_telp`, `jenis_s
 ('489289289', 'Shella Sariyanti', 'Jln. Gunung Daning 44 Setiajaya Cibeureum', '0811211255', 'Pakan Ayam'),
 ('4902842828', 'Saipul Muiz', 'St. Simpang Tiga, Sindangherang, Panumbangan.', '081312962137', 'Pakan Ayam'),
 ('5829583985938', 'Rizki Amalia Oktisah', 'Jln.Budi Dharma no. 69, Rt.05, Rw.01, Kecamatan Karimun', '085795769489', 'Vaksin/Vitamin'),
-('5e094dfd7a95f', 'Kokom Komariah', 'Jln.Budi Dharma no. 69, Rt.05, Rw.01, Kecamatan Karimun', '08577454', 'Pakan Ayam'),
-('5e0a80d052acf', '&lt;h1&gt;Muiz&lt;/h1&gt;', 'WRD', '080488849343', 'Bibit Ayam/DOC'),
-('5e0a8577b0e56', '&lt;script&gt;alert(&#039;Selamat datang di DUMET School&#039;)&lt;/script&gt;', 'St. Simpang Tiga, Sindangherang, Panumbangan.', '081312962137', 'Pakan Ayam');
+('5e094dfd7a95f', 'Kokom Komariah', 'Jln.Budi Dharma no. 69, Rt.05, Rw.01, Kecamatan Karimun', '08577454', 'Pakan Ayam');
 
 -- --------------------------------------------------------
 
@@ -298,7 +302,7 @@ CREATE TABLE `tbl_telur` (
 --
 
 INSERT INTO `tbl_telur` (`berat`, `jumlah`) VALUES
-(30, 25);
+(210, 25);
 
 -- --------------------------------------------------------
 
@@ -324,7 +328,11 @@ CREATE TABLE `tbl_telur_harian2` (
 INSERT INTO `tbl_telur_harian2` (`id_input`, `tgl_input`, `id_user`, `id_kandang`, `jumlah`, `telur_sehat`, `telur_cacat`, `kalkulasi_butir`) VALUES
 ('5de3972395c94', '2019-12-01', '5de1b2c6d81cc', 43, 100, 50, 34, 84),
 ('5de770ad84a23', '2019-12-04', '5de1b2c6d81cc', 42, 50, 50, 35, 85),
-('5df99def86d53', '2019-12-18', '5de1b2c6d81cc', 42, 30, 5, 25, 30);
+('5df99def86d53', '2019-12-18', '5de1b2c6d81cc', 42, 30, 5, 25, 30),
+('5e20114a8dcd9', '2020-01-16', '5de1b2c6d81cc', 42, 30, 25, 15, 40),
+('5e21566fd8e06', '2020-01-17', '5de1b2c6d81cc', 42, 50, 30, 25, 55),
+('5e26a3885d958', '2020-01-21', '5de1b2c6d81cc', 43, 50, 30, 35, 65),
+('5e2c6afd85e59', '2020-01-25', '5de1b2c6d81cc', 42, 50, 25, 27, 52);
 
 -- --------------------------------------------------------
 
@@ -370,7 +378,8 @@ CREATE TABLE `tbl_vitamin` (
 --
 
 INSERT INTO `tbl_vitamin` (`id_vitamin`, `merk`, `id_supplier`, `stok`, `tgl_update`) VALUES
-('5deae9a56b3d8', 'ADS15', '4902842828', 101, '2019-12-10 22:29:33');
+('5deae9a56b3d8', 'ADS15', '4902842828', 120, '2020-01-25 23:13:42'),
+('5e20104c2f21a', 'VIT-X01', '5829583985938', 50, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -395,7 +404,8 @@ CREATE TABLE `tbl_vitamin_masuk` (
 INSERT INTO `tbl_vitamin_masuk` (`id_input`, `merk`, `id_supplier`, `tgl_masuk`, `harga`, `jumlah`, `total_harga`) VALUES
 ('5deaecb0b511e', 'Senorita12', '4902842828', '2019-12-07', 3000, 30, 90000),
 ('5defb3922f3e7', 'Senorita12', '4902842828', '2019-12-10', 3000, 10, 30000),
-('5defb478b1dad', 'Senorita12', '489289289', '2019-12-10', 3000, 3, 9000);
+('5defb478b1dad', 'Senorita12', '489289289', '2019-12-10', 3000, 3, 9000),
+('5e2c65fe3c0e3', 'ADS15', '489289289', '2020-01-25', 25000, 20, 500000);
 
 -- --------------------------------------------------------
 
@@ -419,7 +429,8 @@ CREATE TABLE `tbl_vitamin_pakai` (
 
 INSERT INTO `tbl_vitamin_pakai` (`id_input`, `merk`, `tgl_input`, `waktu_input`, `id_user`, `id_kandang`, `jumlah`) VALUES
 ('5deaf83a46188', 'Senorita12', '2019-12-07', '07:54:08', '5de1b2c6d81cc', 42, 30),
-('5defb65054b70', 'Senorita12', '2019-12-10', '22:14:14', '5de1b2c6d81cc', 42, 2);
+('5defb65054b70', 'Senorita12', '2019-12-10', '22:14:14', '5de1b2c6d81cc', 42, 2),
+('5e2c6780b1c59', 'ADS15', '2020-01-25', '23:05:22', '5de1b2c6d81cc', 42, 2);
 
 --
 -- Indexes for dumped tables

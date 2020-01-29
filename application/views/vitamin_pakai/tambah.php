@@ -37,7 +37,7 @@
                                     <div class="col-md-6 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                                            <input type="text" class="form-control timepicker24" value="<?= date('H:i:s'); ?>" name="waktu_input">                                            
+                                            <input type="text" class="form-control timepicker24" value="<?= date('H:i:s'); ?>" name="waktu_input" readonly>
                                         </div>
                                         <span class="help-block">Masukan waktu input pemakaian vitamin</span>
                                     </div>
